@@ -1,0 +1,17 @@
+PODS:
+  - FCChatHeads (0.1.0):
+    - pop (~> 1.0)
+  - pop (1.0.7)
+
+DEPENDENCIES:
+  - FCChatHeads (from `../`)
+
+EXTERNAL SOURCES:
+  FCChatHeads:
+    :path: ../
+
+SPEC CHECKSUMS:
+  FCChatHeads: 5a429c18890315e76db584300c638b2260e91dbb
+  pop: 628ffc631644601567ee8bfaaaea493ebd7d0923
+
+COCOAPODS: 0.35.0
