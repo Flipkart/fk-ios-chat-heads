@@ -37,14 +37,16 @@
 @protocol FCChatHeadsControllerDatasource <NSObject>
 
 @optional
+/*
 - (NSInteger)maximumNumberOfChatHeads:(FCChatHeadsController *)chatHeadsController;
 - (BOOL)showPopoverOnChatHeadSelection:(FCChatHeadsController *)chatHeadsController;
+ */
 - (UIView *)chatHeadsController:(FCChatHeadsController *)chatHeadsController viewForPopoverForChatHeadWithChatID:(NSString *)chatID;
 
 @end
 
 @protocol FCChatHeadsControllerDelegate <NSObject>
-
+/*
 - (void)chatHeadsController:(FCChatHeadsController *)chatHeadsController didSelectChatHeadWithChatID:(NSString *)chatID;
-
+*/
 @end

@@ -10,14 +10,14 @@
 #import <UIKit/UIKit.h>
 
 
-#define CHAT_HEAD_DIMENSION             50.0
+#define CHAT_HEAD_DIMENSION             40.0
 #define CHAT_HEAD_IMAGE_INSET           0.0
 #define CHAT_HEAD_SHADOW_RADIUS         2.0
 #define CHAT_HEAD_DECELERATION_X        1200.0
 #define CHAT_HEAD_DECELERATION_Y        1200.0
 #define CHAT_HEAD_DECELERATION          {CHAT_HEAD_DECELERATION_X, CHAT_HEAD_DECELERATION_Y};
 #define CHAT_HEAD_MARGIN_X              5.0
-#define CHAT_HEAD_MARGIN_Y              25.0
+#define CHAT_HEAD_MARGIN_Y              20.0
 
 
 typedef enum {

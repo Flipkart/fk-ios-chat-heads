@@ -730,6 +730,9 @@ static FCChatHeadsController *_chatHeadsController;
     UIView *contentView = nil;
     if (self.datasource && [self.datasource respondsToSelector:@selector(chatHeadsController:viewForPopoverForChatHeadWithChatID:)]) {
         contentView = [self.datasource chatHeadsController:self viewForPopoverForChatHeadWithChatID:self.activeChatHead.chatID];
+        CGRect frame = [[[[[UIApplication sharedApplication] delegate] window] screen] applicationFrame];
+        frame.size.height -= CGRectGetMaxY(self.activeChatHead.frame);
+        contentView.frame = frame;
     }
     
     if (contentView)
@@ -744,9 +747,10 @@ static FCChatHeadsController *_chatHeadsController;
     }
     
     self.popoverView.sidePadding = 0.0;
+    self.popoverView.topMargin = 0.0;
     self.popoverView.cornerRadius = 0.0;
     self.popoverView.bubblePaddingX = -self.popoverView.cornerRadius;
-    self.popoverView.bubblePaddingY = -self.popoverView.cornerRadius;
+    self.popoverView.bubblePaddingY = 0.0;
     self.popoverView.delegate = self;
     self.popoverView.backgroundColor = [UIColor whiteColor];
     self.popoverView.has3DStyle = NO;
