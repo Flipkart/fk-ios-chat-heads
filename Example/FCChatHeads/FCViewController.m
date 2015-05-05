@@ -12,6 +12,7 @@
 @interface FCViewController () <FCChatHeadsControllerDatasource>
 {
     NSUInteger _index;
+    BOOL chatHeadsShown;
 }
 
 @end
@@ -63,14 +64,46 @@
 {
     if (longPress.state == UIGestureRecognizerStateBegan)
     {
-        if (ChatHeadsController.allChatHeadsHidden)
+        if (chatHeadsShown)
         {
-            [ChatHeadsController unhideAllChatHeads];
+            chatHeadsShown = NO;
+            
+            [ChatHeadsController dismissAllChatHeads:YES];
         }
         else
         {
-            [ChatHeadsController hideAllChatHeads];
+            chatHeadsShown = YES;
+            
+            NSMutableArray *chatHeads = [NSMutableArray array];
+            
+            for (int count = 0; count < 3; count++)
+            {
+                NSString *imageName = [NSString stringWithFormat:@"%d", count%6 + 1];
+                
+                //    UIView *view = [[UIView alloc] initWithFrame:DEFAULT_CHAT_HEAD_FRAME];
+                UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName]];
+                //    imageView.frame = DEFAULT_CHAT_HEAD_FRAME;
+                //    imageView.contentMode = UIViewContentModeScaleToFill;
+                imageView.layer.cornerRadius = CGRectGetHeight(imageView.bounds)/2;
+                imageView.layer.masksToBounds = YES;
+                
+                FCChatHead *chatHead = [FCChatHead chatHeadWithView:imageView
+                                                             chatID:imageName
+                                                           delegate:ChatHeadsController];
+                
+                [chatHeads addObject:chatHead];
+            }
+            
+            [ChatHeadsController presentChatHeads:chatHeads animated:YES];
         }
+//        if (ChatHeadsController.allChatHeadsHidden)
+//        {
+//            [ChatHeadsController unhideAllChatHeads];
+//        }
+//        else
+//        {
+//            [ChatHeadsController hideAllChatHeads];
+//        }
     }
 }
 

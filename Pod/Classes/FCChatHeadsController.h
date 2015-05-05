@@ -31,8 +31,13 @@
 - (void)presentChatHeadWithImage:(UIImage *)image chatID:(NSString *)chatID;
 - (void)presentChatHeadWithView:(UIView *)view chatID:(NSString *)chatID;
 
+- (void)presentChatHeads:(NSArray *)chatHeads animated:(BOOL)animated;
+
 - (void)hideAllChatHeads;
 - (void)unhideAllChatHeads;
+
+//- (void)dismissChatheadWithID:(NSString *)chatID animated:(BOOL)animated;
+- (void)dismissAllChatHeads:(BOOL)animated;
 
 @end
 
