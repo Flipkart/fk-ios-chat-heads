@@ -24,10 +24,15 @@
 @property (nonatomic, weak) id<FCChatHeadsControllerDatasource> datasource;
 @property (nonatomic, weak) id<FCChatHeadsControllerDelegate> delegate;
 
+@property (nonatomic, assign, readonly) BOOL allChatHeadsHidden;
+
 + (instancetype)chatHeadsController;
 
 - (void)presentChatHeadWithImage:(UIImage *)image chatID:(NSString *)chatID;
 - (void)presentChatHeadWithView:(UIView *)view chatID:(NSString *)chatID;
+
+- (void)hideAllChatHeads;
+- (void)unhideAllChatHeads;
 
 @end
 

@@ -31,6 +31,10 @@
     
     [self.view addGestureRecognizer:tapGesture];
     
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongTap:)];
+    
+    [self.view addGestureRecognizer:longPress];
+    
     ChatHeadsController.datasource = self;
 }
 
@@ -55,6 +59,20 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)handleLongTap:(UILongPressGestureRecognizer *)longPress
+{
+    if (longPress.state == UIGestureRecognizerStateBegan)
+    {
+        if (ChatHeadsController.allChatHeadsHidden)
+        {
+            [ChatHeadsController unhideAllChatHeads];
+        }
+        else
+        {
+            [ChatHeadsController hideAllChatHeads];
+        }
+    }
+}
 
 - (UIView *)chatHeadsController:(FCChatHeadsController *)chatHeadsController viewForPopoverForChatHeadWithChatID:(NSString *)chatID
 {

@@ -36,6 +36,8 @@ static FCChatHeadsController *_chatHeadsController;
 
 @property (nonatomic, strong) UIImageView *sinkCross;
 
+@property (nonatomic, assign) BOOL allChatHeadsHidden;
+
 @end
 
 
@@ -1069,6 +1071,28 @@ static FCChatHeadsController *_chatHeadsController;
     return result;
 }
 
+#pragma mark -
+#pragma mark - UI state
+
+- (void)hideAllChatHeads
+{
+    for (FCChatHead *chatHead in self.chatHeads)
+    {
+        [chatHead setHidden:YES];
+    }
+//    [self.chatHeads makeObjectsPerformSelector:@selector(setHidden:) withObject:[NSNumber numberWithBool:YES]];
+    self.allChatHeadsHidden = YES;
+}
+
+- (void)unhideAllChatHeads
+{
+    for (FCChatHead *chatHead in self.chatHeads)
+    {
+        [chatHead setHidden:NO];
+    }
+//    [self.chatHeads makeObjectsPerformSelector:@selector(setHidden:) withObject:[NSNumber numberWithBool:NO]];
+    self.allChatHeadsHidden = NO;
+}
 
 @end
 
