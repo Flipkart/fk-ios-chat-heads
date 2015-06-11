@@ -638,6 +638,10 @@ static FCChatHeadsController *_chatHeadsController;
                          [self removeChatHead:chatHead];
                      }];
     
+    if (self.delegate && [self.delegate respondsToSelector:@selector(chatHeadsController:didRemoveChatHeadWithChatID:)]) {
+        [self.delegate chatHeadsController:self didRemoveChatHeadWithChatID:chatHead.chatID];
+    }
+
     [self.chatHeads removeObject:chatHead];
 }
 
@@ -814,6 +818,10 @@ static FCChatHeadsController *_chatHeadsController;
     if (self.popoverView) {
         [self.popoverView dismissAnimated:YES];
         self.popoverView = nil;
+        
+        if (self.delegate && [self.delegate respondsToSelector:@selector(chatHeadsController:didDismissPopoverForChatID:)]) {
+            [self.delegate chatHeadsController:self didDismissPopoverForChatID:self.activeChatHead.chatID];
+        }
     }
 }
 
