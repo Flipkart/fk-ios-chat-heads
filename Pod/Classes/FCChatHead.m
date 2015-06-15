@@ -230,7 +230,14 @@
 {
     [super layoutSubviews];
     
-    self.badge.hidden = self.animating;
+    if (self.animating)
+    {
+        self.badge.hidden = YES;
+    }
+    else
+    {
+        self.badge.hidden = (self.unreadCount == 0);
+    }
     
     CGSize textSize = [self.badge.text sizeWithFont:self.badge.font constrainedToSize:CGSizeMake(CHAT_HEAD_DIMENSION, CGFLOAT_MAX)];
     CGRect frame = self.badge.frame;
