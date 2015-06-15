@@ -229,15 +229,33 @@
 - (void)highlightTouch
 {
 //    self.transform = CGAffineTransformMakeScale(0.9, 0.9);
-    self.imageView.alpha = 0.8f;
-    self.backgroundColor = [UIColor blackColor];
+//    self.imageView.alpha = 0.8f;
+//    self.backgroundColor = [UIColor blackColor];
 }
 
 - (void)unhightlight
 {
 //    self.transform = CGAffineTransformIdentity;
-    self.imageView.alpha = 1.0f;
-    self.backgroundColor = [UIColor clearColor];
+//    self.imageView.alpha = 1.0f;
+//    self.backgroundColor = [UIColor clearColor];
+}
+
+- (void)setUnreadCount:(NSInteger)unreadCount
+{
+    if (_unreadCount != unreadCount)
+    {
+        _unreadCount = unreadCount;
+        
+        if (_unreadCount == 0)
+        {
+            self.badge.hidden = YES;
+        }
+        else
+        {
+            self.badge.hidden = NO;
+            self.badge.text = [NSString stringWithFormat:@"%ld", (long)unreadCount];
+        }
+    }
 }
 
 - (void)setHierarchyLevel:(NSUInteger)hierarchyLevel
@@ -268,7 +286,7 @@
         else
             _indentationLevel = indentationLevel;
         
-        self.badge.text = [NSString stringWithFormat:@"%lu", (unsigned long)_indentationLevel];
+//        self.badge.text = [NSString stringWithFormat:@"%lu", (unsigned long)_indentationLevel];
     }
 }
 

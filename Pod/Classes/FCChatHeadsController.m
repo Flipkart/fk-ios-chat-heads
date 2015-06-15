@@ -1146,6 +1146,12 @@ static FCChatHeadsController *_chatHeadsController;
     self.allChatHeadsHidden = NO;
 }
 
+- (void)setUnreadCount:(NSInteger)unreadCount forChatHeadWithChatID:(NSString *)chatID
+{
+    FCChatHead *chatHead = [self chatHeadWithID:chatID];
+    [chatHead setUnreadCount:unreadCount];
+}
+
 - (void)dismissAllChatHeads:(BOOL)animated
 {
     NSInteger index = self.chatHeads.count - 1;

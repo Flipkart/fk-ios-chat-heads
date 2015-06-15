@@ -24,6 +24,8 @@
 
 @property (nonatomic, assign) BOOL circular;
 
+@property (nonatomic, assign) NSInteger unreadCount;
+
 + (instancetype)chatHeadWithImage:(UIImage *)image;
 + (instancetype)chatHeadWithImage:(UIImage *)image delegate:(id<FCChatHeadsDelegate>)delegate;
 + (instancetype)chatHeadWithImage:(UIImage *)image chatID:(NSString *)chatID delegate:(id<FCChatHeadsDelegate>)delegate;
