@@ -73,7 +73,7 @@ static FCChatHeadsController *_chatHeadsController;
     self.activeChatHead = nil;
     self.isExpanded = NO;
     self.chatHeads = [NSMutableArray array];
-    _activeChatHeadFrameInStack = CGRectZero;
+    _activeChatHeadFrameInStack = DEFAULT_CHAT_HEAD_FRAME;
 }
 
 #pragma mark -
@@ -149,7 +149,7 @@ static FCChatHeadsController *_chatHeadsController;
     if (!self.isExpanded)
     {
         [self.chatHeads addObject:aChatHead];
-        [self layoutChatHeads:YES];
+//        [self layoutChatHeads:YES];
         
         if (animated)
         {
@@ -292,7 +292,7 @@ static FCChatHeadsController *_chatHeadsController;
     {
         if (self.chatHeads.count)
         {
-            frame = [(FCChatHead *)[self.chatHeads lastObject] frame];
+            frame = _activeChatHeadFrameInStack;//[(FCChatHead *)[self.chatHeads lastObject] frame];
         }
     }
     else
@@ -406,7 +406,7 @@ static FCChatHeadsController *_chatHeadsController;
         else
         {
             frame = _activeChatHeadFrameInStack;
-            _activeChatHeadFrameInStack = CGRectZero;
+//            _activeChatHeadFrameInStack = CGRectZero;
         }
         
         NSUInteger indentationLevel = 1;
@@ -480,6 +480,10 @@ static FCChatHeadsController *_chatHeadsController;
         if (finished)
         {
             aChatHead.animating = NO;
+            if (!self.isExpanded)
+            {
+                [self layoutChatHeads:YES];
+            }
         }
     }];
     
@@ -549,6 +553,9 @@ static FCChatHeadsController *_chatHeadsController;
         else
         {
             positionAnimation.completionBlock = ^(POPAnimation *anim, BOOL finished) {
+                
+                _activeChatHeadFrameInStack = self.activeChatHead.frame;
+                
                 if (self.isExpanded)
                 {
                     //                    [aChatHead removeFromSuperview];
@@ -679,7 +686,7 @@ static FCChatHeadsController *_chatHeadsController;
         if (self.chatHeads.count == 0)
         {
             self.isExpanded = NO;
-            _activeChatHeadFrameInStack = CGRectZero;
+//            _activeChatHeadFrameInStack = CGRectZero;
         }
     }
     else

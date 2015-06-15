@@ -37,9 +37,9 @@ typedef enum {
 
 
 #define SCREEN_BOUNDS                   ([[UIScreen mainScreen] bounds])
-#define DEFAULT_CHAT_HEAD_FRAME         (CGRectMake(SCREEN_BOUNDS.size.width - CHAT_HEAD_DIMENSION - CHAT_HEAD_MARGIN_X,    \
-                                                    SCREEN_BOUNDS.size.height - CHAT_HEAD_DIMENSION - CHAT_HEAD_MARGIN_Y,   \
-                                                    CHAT_HEAD_DIMENSION,                                                    \
+#define DEFAULT_CHAT_HEAD_FRAME         (CGRectMake(SCREEN_BOUNDS.size.width - CHAT_HEAD_DIMENSION - CHAT_HEAD_MARGIN_X,        \
+                                                    SCREEN_BOUNDS.size.height - CHAT_HEAD_DIMENSION - 2.5*CHAT_HEAD_MARGIN_Y,   \
+                                                    CHAT_HEAD_DIMENSION,                                                        \
                                                     CHAT_HEAD_DIMENSION))
 #define CHAT_HEAD_STACK_STEP_X          2.0
 #define CHAT_HEAD_STACK_STEP_Y          2.0

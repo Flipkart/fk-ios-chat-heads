@@ -41,18 +41,41 @@
 
 - (void)handleTap:(UITapGestureRecognizer *)tap
 {
-    NSString *imageName = [NSString stringWithFormat:@"%lu", (unsigned long)_index++%6 + 1];
-    
-    //    UIView *view = [[UIView alloc] initWithFrame:DEFAULT_CHAT_HEAD_FRAME];
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName]];
-//    imageView.frame = DEFAULT_CHAT_HEAD_FRAME;
-//    imageView.contentMode = UIViewContentModeScaleToFill;
-    imageView.layer.cornerRadius = CGRectGetHeight(imageView.bounds)/2;
-    imageView.layer.masksToBounds = YES;
-    //    [view addSubview:imageView];
-    
-    //    [ChatHeadsController presentChatHeadWithImage:[UIImage imageNamed:imageName] chatID:imageName];
-    [ChatHeadsController presentChatHeadWithView:imageView chatID:imageName];
+    if (_index%2 == 0)
+    {
+        NSString *imageName = [NSString stringWithFormat:@"%lu", (unsigned long)_index++%6 + 1];
+        
+        //    UIView *view = [[UIView alloc] initWithFrame:DEFAULT_CHAT_HEAD_FRAME];
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName]];
+        imageView.frame = CGRectMake(0, 0, 40, 40);
+        //    imageView.frame = DEFAULT_CHAT_HEAD_FRAME;
+        //    imageView.contentMode = UIViewContentModeScaleToFill;
+        imageView.layer.cornerRadius = CGRectGetHeight(imageView.bounds)/2;
+        imageView.layer.masksToBounds = YES;
+        //    [view addSubview:imageView];
+        
+        //    [ChatHeadsController presentChatHeadWithImage:[UIImage imageNamed:imageName] chatID:imageName];
+        [ChatHeadsController presentChatHeadWithView:imageView chatID:imageName];
+    }
+    else
+    {
+        for (NSInteger count = 0; count < 3; count++)
+        {
+            NSString *imageName = [NSString stringWithFormat:@"%lu", (unsigned long)_index++%6 + 1];
+            
+            //    UIView *view = [[UIView alloc] initWithFrame:DEFAULT_CHAT_HEAD_FRAME];
+            UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName]];
+            imageView.frame = CGRectMake(0, 0, 40, 40);
+            //    imageView.frame = DEFAULT_CHAT_HEAD_FRAME;
+            //    imageView.contentMode = UIViewContentModeScaleToFill;
+            imageView.layer.cornerRadius = 20.0;//CGRectGetHeight(imageView.bounds)/2;
+            imageView.layer.masksToBounds = YES;
+            //    [view addSubview:imageView];
+            
+            //    [ChatHeadsController presentChatHeadWithImage:[UIImage imageNamed:imageName] chatID:imageName];
+            [ChatHeadsController presentChatHeadWithView:imageView chatID:imageName];
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning {
