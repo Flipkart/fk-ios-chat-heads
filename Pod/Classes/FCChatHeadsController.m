@@ -18,7 +18,7 @@ static FCChatHeadsController *_chatHeadsController;
 {
     CGRect _activeChatHeadFrameInStack;
     CGRect _sinkCrossPeriphery;
-//    NSInteger _draggingChatHeadOriginalSubviewIndex;
+    //    NSInteger _draggingChatHeadOriginalSubviewIndex;
 }
 
 @property (nonatomic, assign) BOOL isExpanded;
@@ -52,7 +52,7 @@ static FCChatHeadsController *_chatHeadsController;
 {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-            _chatHeadsController = [FCChatHeadsController new];
+        _chatHeadsController = [FCChatHeadsController new];
     });
     
     return _chatHeadsController;
@@ -115,20 +115,20 @@ static FCChatHeadsController *_chatHeadsController;
             
             [self presentChatHead:chatHead animated:NO];
             
-//            if (animated)
-//            {
-//                chatHead.transform = CGAffineTransformMakeScale(0.1, 0.1);
-//            }
+            //            if (animated)
+            //            {
+            //                chatHead.transform = CGAffineTransformMakeScale(0.1, 0.1);
+            //            }
         }
     }
     
-//    if (animated && chatHeads.count)
-//    {
-//        for (FCChatHead *chatHead in chatHeads)
-//        {
-//            [self animateChatHeadPresentation:chatHead];
-//        }
-//    }
+    //    if (animated && chatHeads.count)
+    //    {
+    //        for (FCChatHead *chatHead in chatHeads)
+    //        {
+    //            [self animateChatHeadPresentation:chatHead];
+    //        }
+    //    }
 }
 
 - (void)presentChatHead:(FCChatHead *)aChatHead animated:(BOOL)animated
@@ -153,6 +153,7 @@ static FCChatHeadsController *_chatHeadsController;
         
         if (animated)
         {
+            aChatHead.animating = YES;
             aChatHead.transform = CGAffineTransformMakeScale(0.1, 0.1);
         }
         
@@ -170,6 +171,7 @@ static FCChatHeadsController *_chatHeadsController;
         
         if (animated)
         {
+            aChatHead.animating = YES;
             aChatHead.transform = CGAffineTransformMakeScale(0.1, 0.1);
         }
         
@@ -210,28 +212,28 @@ static FCChatHeadsController *_chatHeadsController;
         {
             FCChatHead *chatHeadToBeRemoved = [self chatHeadToBeRemoved];
             
-                if (chatHeadToBeRemoved.indentationLevel > self.activeChatHead.indentationLevel)
+            if (chatHeadToBeRemoved.indentationLevel > self.activeChatHead.indentationLevel)
+            {
+                chatHead.indentationLevel = self.activeChatHead.indentationLevel + 1;
+                for (FCChatHead *aChatHead in self.chatHeads)
                 {
-                    chatHead.indentationLevel = self.activeChatHead.indentationLevel + 1;
-                    for (FCChatHead *aChatHead in self.chatHeads)
-                    {
-                        if ((chatHead == aChatHead) || (self.activeChatHead == aChatHead) || (chatHeadToBeRemoved == aChatHead)) continue;
-                        
-                        if ((aChatHead.indentationLevel < chatHeadToBeRemoved.indentationLevel) && (aChatHead.indentationLevel > self.activeChatHead.indentationLevel))
-                            aChatHead.indentationLevel = aChatHead.indentationLevel + 1;
-                    }
+                    if ((chatHead == aChatHead) || (self.activeChatHead == aChatHead) || (chatHeadToBeRemoved == aChatHead)) continue;
+                    
+                    if ((aChatHead.indentationLevel < chatHeadToBeRemoved.indentationLevel) && (aChatHead.indentationLevel > self.activeChatHead.indentationLevel))
+                        aChatHead.indentationLevel = aChatHead.indentationLevel + 1;
                 }
-                else
+            }
+            else
+            {
+                chatHead.indentationLevel = self.activeChatHead.indentationLevel - 1;
+                for (FCChatHead *aChatHead in self.chatHeads)
                 {
-                    chatHead.indentationLevel = self.activeChatHead.indentationLevel - 1;
-                    for (FCChatHead *aChatHead in self.chatHeads)
-                    {
-                        if ((chatHead == aChatHead) || (self.activeChatHead == aChatHead) || (chatHeadToBeRemoved == aChatHead)) continue;
-                        
-                        if ((aChatHead.indentationLevel > chatHeadToBeRemoved.indentationLevel) && (aChatHead.indentationLevel < self.activeChatHead.indentationLevel))
-                            aChatHead.indentationLevel = aChatHead.indentationLevel - 1;
-                    }
+                    if ((chatHead == aChatHead) || (self.activeChatHead == aChatHead) || (chatHeadToBeRemoved == aChatHead)) continue;
+                    
+                    if ((aChatHead.indentationLevel > chatHeadToBeRemoved.indentationLevel) && (aChatHead.indentationLevel < self.activeChatHead.indentationLevel))
+                        aChatHead.indentationLevel = aChatHead.indentationLevel - 1;
                 }
+            }
         }
     }
 }
@@ -304,16 +306,16 @@ static FCChatHeadsController *_chatHeadsController;
         {
             FCChatHead *chatHeadToBeRemoved = [self chatHeadToBeRemoved];
             frame = chatHeadToBeRemoved.frame;
-                if (chatHeadToBeRemoved.indentationLevel > self.activeChatHead.indentationLevel)
-                {
-                    frame.origin.x = self.headSuperView.bounds.size.width - ((self.activeChatHead.indentationLevel + 1)*(CHAT_HEAD_DIMENSION + CHAT_HEAD_MARGIN_X));
-                    frame.origin.y = CHAT_HEAD_MARGIN_Y;
-                }
-                else
-                {
-                    frame.origin.x = self.headSuperView.bounds.size.width - ((self.activeChatHead.indentationLevel - 1)*(CHAT_HEAD_DIMENSION + CHAT_HEAD_MARGIN_X));
-                    frame.origin.y = CHAT_HEAD_MARGIN_Y;
-                }
+            if (chatHeadToBeRemoved.indentationLevel > self.activeChatHead.indentationLevel)
+            {
+                frame.origin.x = self.headSuperView.bounds.size.width - ((self.activeChatHead.indentationLevel + 1)*(CHAT_HEAD_DIMENSION + CHAT_HEAD_MARGIN_X));
+                frame.origin.y = CHAT_HEAD_MARGIN_Y;
+            }
+            else
+            {
+                frame.origin.x = self.headSuperView.bounds.size.width - ((self.activeChatHead.indentationLevel - 1)*(CHAT_HEAD_DIMENSION + CHAT_HEAD_MARGIN_X));
+                frame.origin.y = CHAT_HEAD_MARGIN_Y;
+            }
         }
     }
     return frame;
@@ -355,6 +357,7 @@ static FCChatHeadsController *_chatHeadsController;
     
     if (animated)
     {
+        chatHead.animating = YES;
         chatHead.transform = CGAffineTransformMakeScale(0.5, 0.5);
     }
     
@@ -364,7 +367,7 @@ static FCChatHeadsController *_chatHeadsController;
     {
         [self animateChatHeadPresentation:chatHead];
     }
-
+    
     [self logChatHeadsStack];
 }
 
@@ -395,7 +398,7 @@ static FCChatHeadsController *_chatHeadsController;
     if (!self.isExpanded)
     {
         CGRect frame;
-
+        
         if (CGRectEqualToRect(_activeChatHeadFrameInStack, CGRectZero))
         {
             frame = [(FCChatHead *)[self.chatHeads lastObject] frame];
@@ -461,6 +464,8 @@ static FCChatHeadsController *_chatHeadsController;
 
 - (void)animateChatHeadPresentation:(FCChatHead *)aChatHead
 {
+    aChatHead.animating = YES;
+    
     POPSpringAnimation *scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
     scaleAnimation.velocity = [NSValue valueWithCGPoint:CGPointMake(20.0, 20.0)];
     scaleAnimation.name = ChatHeadAdditionAnimationKey;
@@ -468,7 +473,16 @@ static FCChatHeadsController *_chatHeadsController;
     scaleAnimation.dynamicsFriction = 50.0f;
     scaleAnimation.springBounciness = 12.5f;
     scaleAnimation.springSpeed = 20.0;
+    //    scaleAnimation.fromValue = [NSValue valueWithCGPoint:CGPointMake(0.5, 0.5)];
     scaleAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(1.0, 1.0)];
+    [scaleAnimation setCompletionBlock:^(POPAnimation *anim, BOOL finished) {
+        [aChatHead setNeedsLayout];
+        if (finished)
+        {
+            aChatHead.animating = NO;
+        }
+    }];
+    
     [aChatHead.layer pop_addAnimation:scaleAnimation forKey:ChatHeadAdditionAnimationKey];
 }
 
@@ -537,8 +551,8 @@ static FCChatHeadsController *_chatHeadsController;
             positionAnimation.completionBlock = ^(POPAnimation *anim, BOOL finished) {
                 if (self.isExpanded)
                 {
-//                    [aChatHead removeFromSuperview];
-//                    [self.headSuperView insertSubview:aChatHead atIndex:_draggingChatHeadOriginalSubviewIndex];
+                    //                    [aChatHead removeFromSuperview];
+                    //                    [self.headSuperView insertSubview:aChatHead atIndex:_draggingChatHeadOriginalSubviewIndex];
                     if (!self.popoverView)
                     {
                         [self presentPopover];
@@ -619,7 +633,7 @@ static FCChatHeadsController *_chatHeadsController;
     
     if (proposedFinalY > maxY)
         proposedFinalY = maxY;
-
+    
     *removeChatHead = shouldRemoveChatHead;
     
     CGPoint proposedEndPoint = CGPointMake(proposedFinalX, proposedFinalY);
@@ -641,7 +655,7 @@ static FCChatHeadsController *_chatHeadsController;
     if (self.delegate && [self.delegate respondsToSelector:@selector(chatHeadsController:didRemoveChatHeadWithChatID:)]) {
         [self.delegate chatHeadsController:self didRemoveChatHeadWithChatID:chatHead.chatID];
     }
-
+    
     [self.chatHeads removeObject:chatHead];
 }
 
@@ -849,7 +863,7 @@ static FCChatHeadsController *_chatHeadsController;
             NSArray *chatHeadsToMove = nil;
             if (self.isExpanded)
             {
-//                _draggingChatHeadOriginalSubviewIndex = [self.chatHeads indexOfObject:chatHead];
+                //                _draggingChatHeadOriginalSubviewIndex = [self.chatHeads indexOfObject:chatHead];
                 [self.headSuperView bringSubviewToFront:chatHead];
                 chatHeadsToMove = @[chatHead];
                 [self updateChatHeadsLayoutForDraggingChatHead:chatHead toPosition:[panGesture locationInView:chatHead.superview]];
@@ -1002,7 +1016,7 @@ static FCChatHeadsController *_chatHeadsController;
                                      self.headSuperView.bounds.size.width,
                                      CHAT_HEAD_SINK_HEIGHT);
     self.sinkView.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.75];
-
+    
     UIImage *sinkCrossImage = [UIImage imageNamed:@"FCChatHeads.bundle/ChatHeadSinkCross"];
     self.sinkCross = [[UIImageView alloc] initWithImage:sinkCrossImage];
     CGRect sinkCrossFrame = CGRectMake(CGRectGetMinX(self.sinkView.frame) + (self.sinkView.frame.size.width - sinkCrossImage.size.width)/2,
@@ -1132,7 +1146,7 @@ static FCChatHeadsController *_chatHeadsController;
     {
         [chatHead setHidden:YES];
     }
-//    [self.chatHeads makeObjectsPerformSelector:@selector(setHidden:) withObject:[NSNumber numberWithBool:YES]];
+    //    [self.chatHeads makeObjectsPerformSelector:@selector(setHidden:) withObject:[NSNumber numberWithBool:YES]];
     self.allChatHeadsHidden = YES;
 }
 
@@ -1142,7 +1156,7 @@ static FCChatHeadsController *_chatHeadsController;
     {
         [chatHead setHidden:NO];
     }
-//    [self.chatHeads makeObjectsPerformSelector:@selector(setHidden:) withObject:[NSNumber numberWithBool:NO]];
+    //    [self.chatHeads makeObjectsPerformSelector:@selector(setHidden:) withObject:[NSNumber numberWithBool:NO]];
     self.allChatHeadsHidden = NO;
 }
 
@@ -1160,16 +1174,16 @@ static FCChatHeadsController *_chatHeadsController;
         FCChatHead *chatHead = self.chatHeads[index--];
         [self dismissChatheadWithID:chatHead.chatID animated:animated];
     }
-//    for (FCChatHead *chatHead in self.chatHeads)
-//    {
-//        [self dismissChatheadWithID:chatHead.chatID animated:animated];
-//    }
+    //    for (FCChatHead *chatHead in self.chatHeads)
+    //    {
+    //        [self dismissChatheadWithID:chatHead.chatID animated:animated];
+    //    }
 }
 
 - (void)dismissChatheadWithID:(NSString *)chatID animated:(BOOL)animated
 {
     FCChatHead *chatHead = [self chatHeadWithID:chatID];
-
+    
     if (self.isExpanded)
     {
         if (chatHead == self.activeChatHead)

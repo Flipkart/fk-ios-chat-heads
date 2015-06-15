@@ -50,8 +50,8 @@
 
 @optional
 /*
-- (NSInteger)maximumNumberOfChatHeads:(FCChatHeadsController *)chatHeadsController;
-- (BOOL)showPopoverOnChatHeadSelection:(FCChatHeadsController *)chatHeadsController;
+ - (NSInteger)maximumNumberOfChatHeads:(FCChatHeadsController *)chatHeadsController;
+ - (BOOL)showPopoverOnChatHeadSelection:(FCChatHeadsController *)chatHeadsController;
  */
 - (UIView *)chatHeadsController:(FCChatHeadsController *)chatHeadsController viewForPopoverForChatHeadWithChatID:(NSString *)chatID;
 
@@ -63,6 +63,6 @@
 - (void)chatHeadsController:(FCChatHeadsController *)chController didRemoveChatHeadWithChatID:(NSString *)chatID;
 
 /*
-- (void)chatHeadsController:(FCChatHeadsController *)chatHeadsController didSelectChatHeadWithChatID:(NSString *)chatID;
-*/
+ - (void)chatHeadsController:(FCChatHeadsController *)chatHeadsController didSelectChatHeadWithChatID:(NSString *)chatID;
+ */
 @end

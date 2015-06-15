@@ -14,6 +14,7 @@
 
 @interface FCChatHead : UIView
 
+@property (nonatomic, readonly, strong) UILabel *badge;
 @property (nonatomic, strong, readonly) UIImageView *imageView;
 @property (nonatomic, weak) id<FCChatHeadsDelegate> delegate;
 
@@ -23,6 +24,8 @@
 @property (nonatomic, assign) NSUInteger indentationLevel;
 
 @property (nonatomic, assign) BOOL circular;
+
+@property (nonatomic, assign) BOOL animating;
 
 @property (nonatomic, assign) NSInteger unreadCount;
 

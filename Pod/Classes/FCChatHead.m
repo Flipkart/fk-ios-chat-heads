@@ -80,29 +80,29 @@
 {
     self.backgroundColor = [UIColor clearColor];
     
-//    CGRect bounds = self.bounds;
-//    double radius = self.circular ? CGRectGetHeight(bounds)/2 : 0.0;
-//    
-//    self.layer.cornerRadius = radius;
-//
-//    self.layer.shadowColor = [UIColor colorWithWhite:0.1 alpha:0.9].CGColor;
-//    self.layer.shadowOpacity = 1.0;
-//    self.layer.shadowRadius = CHAT_HEAD_SHADOW_RADIUS;
-//    
-//    if (self.circular)
-//    {
-//        CGMutablePathRef shadowPath = CGPathCreateMutable();
-//        CGPathMoveToPoint(shadowPath, NULL, radius + CHAT_HEAD_SHADOW_RADIUS/2, radius + CHAT_HEAD_SHADOW_RADIUS/2);
-//        
-//        bounds.origin.x += CHAT_HEAD_SHADOW_RADIUS/2;
-//        bounds.origin.y += CHAT_HEAD_SHADOW_RADIUS;
-//        
-//        CGPathAddEllipseInRect(shadowPath, NULL, bounds);
-//        
-//        self.layer.shadowPath = shadowPath;
-//        
-//        CGPathRelease(shadowPath);
-//    }
+    //    CGRect bounds = self.bounds;
+    //    double radius = self.circular ? CGRectGetHeight(bounds)/2 : 0.0;
+    //
+    //    self.layer.cornerRadius = radius;
+    //
+    //    self.layer.shadowColor = [UIColor colorWithWhite:0.1 alpha:0.9].CGColor;
+    //    self.layer.shadowOpacity = 1.0;
+    //    self.layer.shadowRadius = CHAT_HEAD_SHADOW_RADIUS;
+    //
+    //    if (self.circular)
+    //    {
+    //        CGMutablePathRef shadowPath = CGPathCreateMutable();
+    //        CGPathMoveToPoint(shadowPath, NULL, radius + CHAT_HEAD_SHADOW_RADIUS/2, radius + CHAT_HEAD_SHADOW_RADIUS/2);
+    //
+    //        bounds.origin.x += CHAT_HEAD_SHADOW_RADIUS/2;
+    //        bounds.origin.y += CHAT_HEAD_SHADOW_RADIUS;
+    //
+    //        CGPathAddEllipseInRect(shadowPath, NULL, bounds);
+    //
+    //        self.layer.shadowPath = shadowPath;
+    //
+    //        CGPathRelease(shadowPath);
+    //    }
     
     if (!_panGesture)
     {
@@ -121,7 +121,7 @@
         
         _imageView = [[UIImageView alloc] initWithFrame:frame];
         _imageView.autoresizingMask = UIViewAutoresizingNone;
-
+        
         double radius = CGRectGetHeight(frame)/2.0;
         
         _imageView.layer.cornerRadius = radius;
@@ -188,7 +188,7 @@
     
     _didPan = NO;
     dispatch_async(dispatch_get_main_queue(), ^{
-
+        
         [self highlightTouch];
         
     });
@@ -197,7 +197,7 @@
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [super touchesCancelled:touches withEvent:event];
-
+    
     dispatch_async(dispatch_get_main_queue(), ^{
         
         [self unhightlight];
@@ -214,7 +214,7 @@
         [self unhightlight];
         
     });
-
+    
     if (!_didPan) {
         if (self.delegate && [self.delegate respondsToSelector:@selector(chatHeadSelected:)]) {
             [self.delegate chatHeadSelected:self];
@@ -223,21 +223,39 @@
 }
 
 #pragma mark -
+#pragma mark - View Layout
+
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    self.badge.hidden = self.animating;
+    
+    CGSize textSize = [self.badge.text sizeWithFont:self.badge.font constrainedToSize:CGSizeMake(CHAT_HEAD_DIMENSION, CGFLOAT_MAX)];
+    CGRect frame = self.badge.frame;
+    frame.size.width = textSize.width + 5;
+    frame.origin.x = self.frame.size.width - MAX(frame.size.width/2, 15.0);
+    self.badge.frame = frame;
+}
+
+
+#pragma mark -
 #pragma mark - Misc
 
 // Highlights the touch by giving some visual response to it.
 - (void)highlightTouch
 {
-//    self.transform = CGAffineTransformMakeScale(0.9, 0.9);
-//    self.imageView.alpha = 0.8f;
-//    self.backgroundColor = [UIColor blackColor];
+    //    self.transform = CGAffineTransformMakeScale(0.9, 0.9);
+    //    self.imageView.alpha = 0.8f;
+    //    self.backgroundColor = [UIColor blackColor];
 }
 
 - (void)unhightlight
 {
-//    self.transform = CGAffineTransformIdentity;
-//    self.imageView.alpha = 1.0f;
-//    self.backgroundColor = [UIColor clearColor];
+    //    self.transform = CGAffineTransformIdentity;
+    //    self.imageView.alpha = 1.0f;
+    //    self.backgroundColor = [UIColor clearColor];
 }
 
 - (void)setUnreadCount:(NSInteger)unreadCount
@@ -252,8 +270,15 @@
         }
         else
         {
-            self.badge.hidden = NO;
+            self.badge.hidden = self.animating;
             self.badge.text = [NSString stringWithFormat:@"%ld", (long)unreadCount];
+            
+            CGSize textSize = [self.badge.text sizeWithFont:self.badge.font constrainedToSize:CGSizeMake(CHAT_HEAD_DIMENSION, CGFLOAT_MAX)];
+            CGRect frame = self.badge.frame;
+            frame.size.width = textSize.width + 5;
+            frame.origin.x = self.frame.size.width - MAX(frame.size.width/2, 15.0);
+            self.badge.frame = frame;
+            //            [self.badge sizeToFit];
         }
     }
 }
@@ -286,7 +311,7 @@
         else
             _indentationLevel = indentationLevel;
         
-//        self.badge.text = [NSString stringWithFormat:@"%lu", (unsigned long)_indentationLevel];
+        //        self.badge.text = [NSString stringWithFormat:@"%lu", (unsigned long)_indentationLevel];
     }
 }
 
