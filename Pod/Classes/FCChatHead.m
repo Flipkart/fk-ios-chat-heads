@@ -241,7 +241,7 @@
     
     CGSize textSize = [self.badge.text sizeWithFont:self.badge.font constrainedToSize:CGSizeMake(CHAT_HEAD_DIMENSION, CGFLOAT_MAX)];
     CGRect frame = self.badge.frame;
-    frame.size.width = textSize.width + 5;
+    frame.size.width = MAX(textSize.width + 5, 15.0);
     frame.origin.x = self.frame.size.width - MAX(frame.size.width/2, 15.0);
     self.badge.frame = frame;
 }
@@ -282,7 +282,7 @@
             
             CGSize textSize = [self.badge.text sizeWithFont:self.badge.font constrainedToSize:CGSizeMake(CHAT_HEAD_DIMENSION, CGFLOAT_MAX)];
             CGRect frame = self.badge.frame;
-            frame.size.width = textSize.width + 5;
+            frame.size.width = MAX(textSize.width + 5, 15.0);
             frame.origin.x = self.frame.size.width - MAX(frame.size.width/2, 15.0);
             self.badge.frame = frame;
             //            [self.badge sizeToFit];

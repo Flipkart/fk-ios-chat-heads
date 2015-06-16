@@ -149,7 +149,7 @@ static FCChatHeadsController *_chatHeadsController;
     if (!self.isExpanded)
     {
         [self.chatHeads addObject:aChatHead];
-//        [self layoutChatHeads:YES];
+        [self setIndentationAndHierarchyLevels];
         
         if (animated)
         {
@@ -393,6 +393,22 @@ static FCChatHeadsController *_chatHeadsController;
 }
 
 
+- (void)setIndentationAndHierarchyLevels
+{
+    if (!self.isExpanded)
+    {
+        NSUInteger indentationLevel = 1;
+        for (NSInteger count = self.chatHeads.count - 1; count >= 0; count--)
+        {
+            FCChatHead *chatHead = (FCChatHead *)self.chatHeads[count];
+            
+            chatHead.hierarchyLevel = self.chatHeads.count - 1 - count;
+            chatHead.indentationLevel = indentationLevel++;
+        }
+    }
+}
+
+
 - (void)layoutChatHeads:(BOOL)animated
 {
     if (!self.isExpanded)
@@ -406,7 +422,7 @@ static FCChatHeadsController *_chatHeadsController;
         else
         {
             frame = _activeChatHeadFrameInStack;
-//            _activeChatHeadFrameInStack = CGRectZero;
+            //            _activeChatHeadFrameInStack = CGRectZero;
         }
         
         NSUInteger indentationLevel = 1;
@@ -686,7 +702,7 @@ static FCChatHeadsController *_chatHeadsController;
         if (self.chatHeads.count == 0)
         {
             self.isExpanded = NO;
-//            _activeChatHeadFrameInStack = CGRectZero;
+            //            _activeChatHeadFrameInStack = CGRectZero;
         }
     }
     else
