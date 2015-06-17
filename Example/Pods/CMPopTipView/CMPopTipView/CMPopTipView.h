@@ -88,16 +88,16 @@
 
 #import <UIKit/UIKit.h>
 
-typedef NS_ENUM(NSInteger, PointDirection) {
+typedef enum {
     PointDirectionAny = 0,
-    PointDirectionUp,
-    PointDirectionDown,
-};
+	PointDirectionUp,
+	PointDirectionDown,
+} PointDirection;
 
-typedef NS_ENUM(NSInteger, CMPopTipAnimation) {
+typedef enum {
     CMPopTipAnimationSlide = 0,
     CMPopTipAnimationPop
-};
+} CMPopTipAnimation;
 
 
 @protocol CMPopTipViewDelegate;
@@ -131,8 +131,6 @@ typedef NS_ENUM(NSInteger, CMPopTipAnimation) {
 @property (nonatomic, assign)           CGFloat                 sidePadding;
 @property (nonatomic, assign)           CGFloat                 topMargin;
 @property (nonatomic, assign)           CGFloat                 pointerSize;
-@property (nonatomic, assign)           CGFloat                 bubblePaddingX;
-@property (nonatomic, assign)           CGFloat                 bubblePaddingY;
 
 /* Contents can be either a message or a UIView */
 - (id)initWithTitle:(NSString *)titleToShow message:(NSString *)messageToShow;

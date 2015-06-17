@@ -1,5 +1,7 @@
 PODS:
-  - FCChatHeads (0.1.0):
+  - CMPopTipView (2.2.0)
+  - FCChatHeads (0.1.1):
+    - CMPopTipView
     - pop (~> 1.0)
   - pop (1.0.7)
 
@@ -11,7 +13,8 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  FCChatHeads: 5a429c18890315e76db584300c638b2260e91dbb
+  CMPopTipView: a0a88404b9f46a5cfc16ce54bdb1b9bf9acb9aff
+  FCChatHeads: 737b1332c1761fc3d37f7f833369821a70b1325a
   pop: 628ffc631644601567ee8bfaaaea493ebd7d0923
 
-COCOAPODS: 0.35.0
+COCOAPODS: 0.36.4

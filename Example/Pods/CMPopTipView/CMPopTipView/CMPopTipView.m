@@ -34,8 +34,6 @@
 	PointDirection			_pointDirection;
 	CGFloat					_pointerSize;
 	CGPoint					_targetPoint;
-	CGFloat					_bubblePaddingX;
-	CGFloat					_bubblePaddingY;
 }
 
 @property (nonatomic, strong, readwrite)	id	targetObject;
@@ -59,10 +57,10 @@
 
 - (CGRect)contentFrame {
 	CGRect bubbleFrame = [self bubbleFrame];
-	CGRect contentFrame = CGRectMake(bubbleFrame.origin.x + _cornerRadius + _bubblePaddingX,
-									 bubbleFrame.origin.y + _cornerRadius + _bubblePaddingY,
-									 bubbleFrame.size.width - (_bubblePaddingX*2) - (_cornerRadius*2),
-									 bubbleFrame.size.height - (_bubblePaddingY*2) - (_cornerRadius*2));
+	CGRect contentFrame = CGRectMake(bubbleFrame.origin.x + _cornerRadius,
+									 bubbleFrame.origin.y + _cornerRadius,
+									 bubbleFrame.size.width - _cornerRadius*2,
+									 bubbleFrame.size.height - _cornerRadius*2);
 	return contentFrame;
 }
 
@@ -254,12 +252,12 @@
 	// Draw title and text
     if (self.title) {
         [self.titleColor set];
-        CGRect titleFrame = CGRectIntegral([self contentFrame]);
+        CGRect titleFrame = [self contentFrame];
         
         if ([self.title respondsToSelector:@selector(drawWithRect:options:attributes:context:)]) {
             NSMutableParagraphStyle *titleParagraphStyle = [[NSMutableParagraphStyle alloc] init];
             titleParagraphStyle.alignment = self.titleAlignment;
-            titleParagraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
+            titleParagraphStyle.lineBreakMode = NSLineBreakByClipping;
             
             [self.title drawWithRect:titleFrame
                              options:NSStringDrawingUsesLineFragmentOrigin
@@ -278,7 +276,7 @@
 
             [self.title drawInRect:titleFrame
                           withFont:self.titleFont
-                     lineBreakMode:NSLineBreakByWordWrapping
+                     lineBreakMode:NSLineBreakByClipping
                          alignment:self.titleAlignment];
 
 #pragma clang diagnostic pop
@@ -288,17 +286,17 @@
 	
 	if (self.message) {
 		[self.textColor set];
-		CGRect textFrame = CGRectIntegral([self contentFrame]);
+		CGRect textFrame = [self contentFrame];
         
         // Move down to make room for title
         if (self.title) {
             
             if ([self.title respondsToSelector:@selector(boundingRectWithSize:options:attributes:context:)]) {
                 NSMutableParagraphStyle *titleParagraphStyle = [[NSMutableParagraphStyle alloc] init];
-                titleParagraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
+                titleParagraphStyle.lineBreakMode = NSLineBreakByClipping;
 
                 textFrame.origin.y += [self.title boundingRectWithSize:CGSizeMake(textFrame.size.width, 99999.0)
-                                                               options:NSStringDrawingUsesLineFragmentOrigin
+                                                               options:kNilOptions
                                                             attributes:@{
                                                                          NSFontAttributeName: self.titleFont,
                                                                          NSParagraphStyleAttributeName: titleParagraphStyle
@@ -312,7 +310,7 @@
 
                 textFrame.origin.y += [self.title sizeWithFont:self.titleFont
                                              constrainedToSize:CGSizeMake(textFrame.size.width, 99999.0)
-                                                 lineBreakMode:NSLineBreakByWordWrapping].height;
+                                                 lineBreakMode:NSLineBreakByClipping].height;
 
 #pragma clang diagnostic pop
 
@@ -434,10 +432,10 @@
 
         if ([self.title respondsToSelector:@selector(boundingRectWithSize:options:attributes:context:)]) {
             NSMutableParagraphStyle *titleParagraphStyle = [[NSMutableParagraphStyle alloc] init];
-            titleParagraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
+            titleParagraphStyle.lineBreakMode = NSLineBreakByClipping;
 
             titleSize = [self.title boundingRectWithSize:CGSizeMake(rectWidth, 99999.0)
-                                                 options:NSStringDrawingUsesLineFragmentOrigin
+                                                 options:kNilOptions
                                               attributes:@{
                                                            NSFontAttributeName: self.titleFont,
                                                            NSParagraphStyleAttributeName: titleParagraphStyle
@@ -451,7 +449,7 @@
 
             titleSize = [self.title sizeWithFont:self.titleFont
                                constrainedToSize:CGSizeMake(rectWidth, 99999.0)
-                                   lineBreakMode:NSLineBreakByWordWrapping];
+                                   lineBreakMode:NSLineBreakByClipping];
 
 #pragma clang diagnostic pop
         
@@ -461,7 +459,7 @@
         textSize.height += titleSize.height;
     }
     
-	_bubbleSize = CGSizeMake(textSize.width + (_bubblePaddingX*2) + (_cornerRadius*2), textSize.height + (_bubblePaddingY*2) + (_cornerRadius*2));
+	_bubbleSize = CGSizeMake(textSize.width + _cornerRadius*2, textSize.height + _cornerRadius*2);
 	
 	UIView *superview = containerView.superview;
 	if ([superview isKindOfClass:[UIWindow class]])
@@ -759,8 +757,6 @@
 	
 	if ((self = [self initWithFrame:frame])) {
 		self.message = messageToShow;
-        self.isAccessibilityElement = YES;
-        self.accessibilityHint = messageToShow;
 	}
 	return self;
 }

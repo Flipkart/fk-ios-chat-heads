@@ -8,7 +8,7 @@
 
 #import "FCChatHeadsController.h"
 #import "FCChatHead.h"
-#import "CMPopTipView.h"
+#import <CMPopTipView/CMPopTipView.h>
 #import <pop/POP.h>
 
 
@@ -836,8 +836,8 @@ static FCChatHeadsController *_chatHeadsController;
     self.popoverView.sidePadding = 0.0;
     self.popoverView.topMargin = 0.0;
     self.popoverView.cornerRadius = 0.0;
-    self.popoverView.bubblePaddingX = -self.popoverView.cornerRadius;
-    self.popoverView.bubblePaddingY = 0.0;
+//    self.popoverView.bubblePaddingX = -self.popoverView.cornerRadius;
+//    self.popoverView.bubblePaddingY = 0.0;
     self.popoverView.delegate = self;
     self.popoverView.backgroundColor = [UIColor whiteColor];
     self.popoverView.has3DStyle = NO;
