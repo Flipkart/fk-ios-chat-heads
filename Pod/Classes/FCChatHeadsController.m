@@ -836,8 +836,8 @@ static FCChatHeadsController *_chatHeadsController;
     self.popoverView.sidePadding = 0.0;
     self.popoverView.topMargin = 0.0;
     self.popoverView.cornerRadius = 0.0;
-//    self.popoverView.bubblePaddingX = -self.popoverView.cornerRadius;
-//    self.popoverView.bubblePaddingY = 0.0;
+    //    self.popoverView.bubblePaddingX = -self.popoverView.cornerRadius;
+    //    self.popoverView.bubblePaddingY = 0.0;
     self.popoverView.delegate = self;
     self.popoverView.backgroundColor = [UIColor whiteColor];
     self.popoverView.has3DStyle = NO;
@@ -853,12 +853,12 @@ static FCChatHeadsController *_chatHeadsController;
 - (void)dismissPopover
 {
     if (self.popoverView) {
-        [self.popoverView dismissAnimated:YES];
-        self.popoverView = nil;
-        
         if (self.delegate && [self.delegate respondsToSelector:@selector(chatHeadsController:didDismissPopoverForChatID:)]) {
             [self.delegate chatHeadsController:self didDismissPopoverForChatID:self.activeChatHead.chatID];
         }
+        
+        [self.popoverView dismissAnimated:YES];
+        self.popoverView = nil;
     }
 }
 
@@ -919,10 +919,13 @@ static FCChatHeadsController *_chatHeadsController;
 
 - (void)updateChatHeadsLayoutForDraggingChatHead:(FCChatHead *)chatHead toPosition:(CGPoint)panPosition
 {
-    if (chatHead == self.activeChatHead)
-    {
-        [self dismissPopover];
-    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        if (chatHead == self.activeChatHead)
+        {
+            [self dismissPopover];
+        }
+    });
     
     NSUInteger currentIndentation = (SCREEN_BOUNDS.size.width - panPosition.x)/(CHAT_HEAD_DIMENSION + CHAT_HEAD_MARGIN_X) + 1;
     currentIndentation = MIN(self.chatHeads.count, currentIndentation);
@@ -1181,6 +1184,39 @@ static FCChatHeadsController *_chatHeadsController;
     }
     //    [self.chatHeads makeObjectsPerformSelector:@selector(setHidden:) withObject:[NSNumber numberWithBool:NO]];
     self.allChatHeadsHidden = NO;
+}
+
+- (void)collapseChatHeads
+{
+    if (self.chatHeads.count == 0)
+        return;
+    
+    if (self.isExpanded)
+    {
+        [self handleTapOnChatHead:self.activeChatHead];
+    }
+}
+
+- (void)expandChatHeadsWithActiveChatID:(NSString *)chatID
+{
+    if (self.chatHeads.count == 0)
+        return;
+    
+    if (!self.isExpanded)
+    {
+        FCChatHead *chatHeadToPresent = self.activeChatHead;
+        if (chatID.length > 0)
+        {
+            FCChatHead *chatHead = [self chatHeadWithID:chatID];
+            if (chatHead)
+            {
+                [self presentChatHead:chatHead animated:NO];
+                chatHeadToPresent = chatHead;
+            }
+        }
+        
+        [self handleTapOnChatHead:chatHeadToPresent];
+    }
 }
 
 - (void)setUnreadCount:(NSInteger)unreadCount forChatHeadWithChatID:(NSString *)chatID

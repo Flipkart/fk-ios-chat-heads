@@ -36,6 +36,9 @@
 - (void)hideAllChatHeads;
 - (void)unhideAllChatHeads;
 
+- (void)collapseChatHeads;
+- (void)expandChatHeadsWithActiveChatID:(NSString *)chatID;
+
 - (void)setUnreadCount:(NSInteger)unreadCount forChatHeadWithChatID:(NSString *)chatID;
 
 //- (void)dismissChatheadWithID:(NSString *)chatID animated:(BOOL)animated;
