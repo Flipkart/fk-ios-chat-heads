@@ -105,13 +105,18 @@ static FCChatHeadsController *_chatHeadsController;
 
 - (void)presentChatHeads:(NSArray *)chatHeads animated:(BOOL)animated
 {
-    for (FCChatHead *chatHead in chatHeads)
+    for (int count = chatHeads.count - 1; count >= 0; count--)
     {
+        FCChatHead *chatHead = (FCChatHead *)chatHeads[count];
         NSString *chatID = chatHead.chatID;
         
         if (![self bringChatHeadToFrontIfAlreadyPresent:chatID animated:animated])
         {
-            chatHead.frame = [self frameForNewChatHead];
+            CGRect frame = [self frameForNewChatHead];
+            frame.origin.x += count*(CHAT_HEAD_STACK_STEP_X);
+            frame.origin.y += count*(CHAT_HEAD_STACK_STEP_Y);
+            
+            chatHead.frame = frame;
             
             [self presentChatHead:chatHead animated:NO];
             
@@ -290,10 +295,10 @@ static FCChatHeadsController *_chatHeadsController;
     
     if (!self.isExpanded)
     {
-        if (self.chatHeads.count)
-        {
+//        if (self.chatHeads.count)
+//        {
             frame = _activeChatHeadFrameInStack;//[(FCChatHead *)[self.chatHeads lastObject] frame];
-        }
+//        }
     }
     else
     {
@@ -570,8 +575,6 @@ static FCChatHeadsController *_chatHeadsController;
         {
             positionAnimation.completionBlock = ^(POPAnimation *anim, BOOL finished) {
                 
-                _activeChatHeadFrameInStack = self.activeChatHead.frame;
-                
                 if (self.isExpanded)
                 {
                     //                    [aChatHead removeFromSuperview];
@@ -580,6 +583,10 @@ static FCChatHeadsController *_chatHeadsController;
                     {
                         [self presentPopover];
                     }
+                }
+                else
+                {
+                    _activeChatHeadFrameInStack = self.activeChatHead.frame;
                 }
             };
             
