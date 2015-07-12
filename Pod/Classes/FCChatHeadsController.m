@@ -38,6 +38,10 @@ static FCChatHeadsController *_chatHeadsController;
 
 @property (nonatomic, assign) BOOL allChatHeadsHidden;
 
+@property (nonatomic, assign) BOOL chatHeadsMoving;
+
+@property (nonatomic, strong) NSMutableArray *pendingChatHeads;
+
 @end
 
 
@@ -74,6 +78,7 @@ static FCChatHeadsController *_chatHeadsController;
     self.isExpanded = NO;
     self.chatHeads = [NSMutableArray array];
     _activeChatHeadFrameInStack = DEFAULT_CHAT_HEAD_FRAME;
+    self.chatHeadsMoving = NO;
 }
 
 #pragma mark -
@@ -81,9 +86,6 @@ static FCChatHeadsController *_chatHeadsController;
 
 - (void)presentChatHeadWithView:(UIView *)view chatID:(NSString *)chatID
 {
-    if ([self bringChatHeadToFrontIfAlreadyPresent:chatID animated:YES])
-        return;
-    
     FCChatHead *aChatHead = [FCChatHead chatHeadWithView:view chatID:chatID delegate:self];
     aChatHead.frame = [self frameForNewChatHead];
     aChatHead.chatID = chatID;
@@ -93,9 +95,6 @@ static FCChatHeadsController *_chatHeadsController;
 
 - (void)presentChatHeadWithImage:(UIImage *)image chatID:(NSString *)chatID
 {
-    if ([self bringChatHeadToFrontIfAlreadyPresent:chatID animated:YES])
-        return;
-    
     FCChatHead *aChatHead = [FCChatHead chatHeadWithImage:image chatID:chatID delegate:self];
     aChatHead.frame = [self frameForNewChatHead];
     aChatHead.chatID = chatID;
@@ -105,39 +104,44 @@ static FCChatHeadsController *_chatHeadsController;
 
 - (void)presentChatHeads:(NSArray *)chatHeads animated:(BOOL)animated
 {
-    for (int count = chatHeads.count - 1; count >= 0; count--)
+    for (NSInteger count = chatHeads.count - 1; count >= 0; count--)
     {
         FCChatHead *chatHead = (FCChatHead *)chatHeads[count];
-        NSString *chatID = chatHead.chatID;
         
-        if (![self bringChatHeadToFrontIfAlreadyPresent:chatID animated:animated])
+        CGRect frame = [self frameForNewChatHead];
+        frame.origin.x += count*(CHAT_HEAD_STACK_STEP_X);
+        frame.origin.y += count*(CHAT_HEAD_STACK_STEP_Y);
+        
+        chatHead.frame = frame;
+        
+        [self presentChatHead:chatHead animated:animated];
+        
+        if (animated)
         {
-            CGRect frame = [self frameForNewChatHead];
-            frame.origin.x += count*(CHAT_HEAD_STACK_STEP_X);
-            frame.origin.y += count*(CHAT_HEAD_STACK_STEP_Y);
-            
-            chatHead.frame = frame;
-            
-            [self presentChatHead:chatHead animated:NO];
-            
-            //            if (animated)
-            //            {
-            //                chatHead.transform = CGAffineTransformMakeScale(0.1, 0.1);
-            //            }
+            chatHead.transform = CGAffineTransformMakeScale(0.1, 0.1);
         }
     }
     
-    //    if (animated && chatHeads.count)
-    //    {
-    //        for (FCChatHead *chatHead in chatHeads)
-    //        {
-    //            [self animateChatHeadPresentation:chatHead];
-    //        }
-    //    }
+    if (animated && chatHeads.count)
+    {
+        for (FCChatHead *chatHead in chatHeads)
+        {
+            [self animateChatHeadPresentation:chatHead];
+        }
+    }
 }
 
 - (void)presentChatHead:(FCChatHead *)aChatHead animated:(BOOL)animated
 {
+    if (self.chatHeadsMoving)
+    {
+        [self.pendingChatHeads addObject:aChatHead];
+        return;
+    }
+    
+    if ([self bringChatHeadToFrontIfAlreadyPresent:aChatHead.chatID animated:animated])
+        return;
+    
     if (!self.headSuperView)
     {
         UIView *rootView = [[[UIApplication sharedApplication] delegate] window];//[[[[UIApplication sharedApplication] delegate] window] rootViewController].view;
@@ -487,28 +491,51 @@ static FCChatHeadsController *_chatHeadsController;
 {
     aChatHead.animating = YES;
     
-    POPSpringAnimation *scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
-    scaleAnimation.velocity = [NSValue valueWithCGPoint:CGPointMake(20.0, 20.0)];
-    scaleAnimation.name = ChatHeadAdditionAnimationKey;
-    scaleAnimation.dynamicsTension = 100.0;
-    scaleAnimation.dynamicsFriction = 50.0f;
-    scaleAnimation.springBounciness = 12.5f;
-    scaleAnimation.springSpeed = 20.0;
-    //    scaleAnimation.fromValue = [NSValue valueWithCGPoint:CGPointMake(0.5, 0.5)];
-    scaleAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(1.0, 1.0)];
-    [scaleAnimation setCompletionBlock:^(POPAnimation *anim, BOOL finished) {
-        [aChatHead setNeedsLayout];
-        if (finished)
-        {
-            aChatHead.animating = NO;
-            if (!self.isExpanded)
-            {
-                [self layoutChatHeads:YES];
-            }
-        }
-    }];
-    
-    [aChatHead.layer pop_addAnimation:scaleAnimation forKey:ChatHeadAdditionAnimationKey];
+    [UIView animateWithDuration:0.357
+                          delay:0
+         usingSpringWithDamping:0.5
+          initialSpringVelocity:0.5
+                        options:UIViewAnimationOptionBeginFromCurrentState
+                     animations:^{
+                         
+                         aChatHead.transform = CGAffineTransformIdentity;
+                     }
+                     completion:^(BOOL finished) {
+                         
+                         [aChatHead setNeedsLayout];
+                         if (finished)
+                         {
+                             aChatHead.animating = NO;
+                             if (!self.isExpanded)
+                             {
+                                 [self layoutChatHeads:YES];
+                             }
+                         }
+                     }];
+//    
+//    
+//    POPSpringAnimation *scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
+//    scaleAnimation.velocity = [NSValue valueWithCGPoint:CGPointMake(20.0, 20.0)];
+//    scaleAnimation.name = ChatHeadAdditionAnimationKey;
+//    scaleAnimation.dynamicsTension = 100.0;
+//    scaleAnimation.dynamicsFriction = 50.0f;
+//    scaleAnimation.springBounciness = 12.5f;
+//    scaleAnimation.springSpeed = 20.0;
+//    //    scaleAnimation.fromValue = [NSValue valueWithCGPoint:CGPointMake(0.5, 0.5)];
+//    scaleAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(1.0, 1.0)];
+//    [scaleAnimation setCompletionBlock:^(POPAnimation *anim, BOOL finished) {
+//        [aChatHead setNeedsLayout];
+//        if (finished)
+//        {
+//            aChatHead.animating = NO;
+//            if (!self.isExpanded)
+//            {
+//                [self layoutChatHeads:YES];
+//            }
+//        }
+//    }];
+//    
+//    [aChatHead.layer pop_addAnimation:scaleAnimation forKey:ChatHeadAdditionAnimationKey];
 }
 
 - (void)finishPanEndMotionWithVelocity:(CGPoint)panEndVelocity forChatHead:(FCChatHead *)chatHead
@@ -588,6 +615,8 @@ static FCChatHeadsController *_chatHeadsController;
                 {
                     _activeChatHeadFrameInStack = self.activeChatHead.frame;
                 }
+                
+                self.chatHeadsMoving = NO;
             };
             
             [self removeSink:YES];
@@ -680,6 +709,7 @@ static FCChatHeadsController *_chatHeadsController;
                      }
                      completion:^(BOOL finished) {
                          [self removeChatHead:chatHead];
+                         self.chatHeadsMoving = NO;
                      }];
     
     if (self.delegate && [self.delegate respondsToSelector:@selector(chatHeadsController:didRemoveChatHeadWithChatID:)]) {
@@ -757,6 +787,11 @@ static FCChatHeadsController *_chatHeadsController;
     [self logChatHeadsStack];
 }
 
+- (void)handleTapOnBackground:(UITapGestureRecognizer *)tap
+{
+    [self handleTapOnChatHead:self.activeChatHead];
+}
+
 - (void)insertBackgroundView:(BOOL)animated
 {
     if (!self.headSuperView.subviews.count)
@@ -766,6 +801,9 @@ static FCChatHeadsController *_chatHeadsController;
     {
         self.backgroundView = [[UIView alloc] initWithFrame:self.headSuperView.bounds];
         self.backgroundView.backgroundColor = [UIColor colorWithWhite:0.2 alpha:0.8];
+        
+        UITapGestureRecognizer *tapOnBackground = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapOnBackground:)];
+        [self.backgroundView addGestureRecognizer:tapOnBackground];
         
         if (animated)
         {
@@ -890,6 +928,8 @@ static FCChatHeadsController *_chatHeadsController;
             
         case UIGestureRecognizerStateChanged:
         {
+            self.chatHeadsMoving = YES;
+
             NSArray *chatHeadsToMove = nil;
             if (self.isExpanded)
             {
@@ -983,26 +1023,57 @@ static FCChatHeadsController *_chatHeadsController;
 - (void)moveChatHeadStack:(NSArray *)chatHeadsToMove toLocation:(CGPoint)location animated:(BOOL)animated
 {
     NSUInteger chatHeads = chatHeadsToMove.count;
-    double minDelay = 0.1;
-    double delayStep = 0.05;
-    double duration = minDelay + chatHeads*delayStep;
+    __block double delay = 0.0;
+    __block double delayStep = 0.4;
+    __block double duration = 0.1;
     
-    CGPoint center = CGPointMake(location.x + (chatHeads - 1)*CHAT_HEAD_STACK_STEP_X, location.y + (chatHeads - 1)*CHAT_HEAD_STACK_STEP_Y);
+    __block CGPoint center = CGPointMake(location.x + (chatHeads - 1)*CHAT_HEAD_STACK_STEP_X, location.y + (chatHeads - 1)*CHAT_HEAD_STACK_STEP_Y);
     
     if (self.sinkView.superview && CGRectContainsPoint(CHAT_HEAD_SINK_ZONE, center))
     {
         center = CGPointMake(CGRectGetMidX(CHAT_HEAD_SINK_ZONE), CGRectGetMidY(CHAT_HEAD_SINK_ZONE));
     }
-    for (FCChatHead *chatHead in chatHeadsToMove)
-    {
-        [UIView animateWithDuration:duration animations:^{
-            chatHead.center = center;
-        }];
-        
-        center.x -= CHAT_HEAD_STACK_STEP_X;
-        center.y -= CHAT_HEAD_STACK_STEP_Y;
-        duration -= delayStep;
-    }
+    
+    [chatHeadsToMove enumerateObjectsWithOptions:NSEnumerationReverse
+                                      usingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                                          
+                                          FCChatHead *chatHead = (FCChatHead *)obj;
+                                          
+                                          [UIView animateWithDuration:duration
+                                                                delay:delay
+                                               usingSpringWithDamping:0.7
+                                                initialSpringVelocity:0.9
+                                                              options:UIViewAnimationOptionBeginFromCurrentState
+                                                           animations:^{
+                                                               
+                                                               chatHead.center = center;
+                                                           }
+                                                           completion:nil];
+                                          
+                                          center.x -= CHAT_HEAD_STACK_STEP_X;
+                                          center.y -= CHAT_HEAD_STACK_STEP_Y;
+                                          
+                                          duration += delayStep;
+                                      }];
+    
+//    for (FCChatHead *chatHead in chatHeadsToMove)
+//    {
+//        [UIView animateWithDuration:duration
+//                              delay:delay
+//             usingSpringWithDamping:0.7
+//              initialSpringVelocity:0.9
+//                            options:UIViewAnimationOptionBeginFromCurrentState
+//                         animations:^{
+//                             
+//                             chatHead.center = center;
+//                         }
+//                         completion:nil];
+//        
+//        center.x -= CHAT_HEAD_STACK_STEP_X;
+//        center.y -= CHAT_HEAD_STACK_STEP_Y;
+//        delay += 0.1;
+////        duration -= delayStep;
+//    }
 }
 
 
@@ -1122,6 +1193,38 @@ static FCChatHeadsController *_chatHeadsController;
             }
         }
     }
+}
+
+
+- (void)setChatHeadsMoving:(BOOL)chatHeadsMoving
+{
+    if (_chatHeadsMoving != chatHeadsMoving)
+    {
+        _chatHeadsMoving = chatHeadsMoving;
+        
+        if (!_chatHeadsMoving)
+        {
+            if (self.pendingChatHeads.count)
+            {
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        
+                        [self presentChatHeads:self.pendingChatHeads animated:YES];
+                    });
+                });
+            }
+        }
+    }
+}
+
+
+- (NSMutableArray *)pendingChatHeads
+{
+    if (!_pendingChatHeads)
+    {
+        _pendingChatHeads = [NSMutableArray array];
+    }
+    return _pendingChatHeads;
 }
 
 

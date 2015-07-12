@@ -37,6 +37,13 @@
     [self.view addGestureRecognizer:longPress];
     
     ChatHeadsController.datasource = self;
+    
+    
+//    [NSTimer scheduledTimerWithTimeInterval:2
+//                                     target:self
+//                                   selector:@selector(handleTap:)
+//                                   userInfo:nil
+//                                    repeats:YES];
 }
 
 - (void)handleTap:(UITapGestureRecognizer *)tap
