@@ -278,7 +278,18 @@
         else
         {
             self.badge.hidden = self.animating;
-            self.badge.text = [NSString stringWithFormat:@"%ld", (long)unreadCount];
+            
+            NSString *text;
+            if (unreadCount > 99)
+            {
+                text = @"99+";
+            }
+            else
+            {
+                text = [NSString stringWithFormat:@"%ld", (long)unreadCount];
+            }
+            
+            self.badge.text = text;
             
             CGSize textSize = [self.badge.text sizeWithFont:self.badge.font constrainedToSize:CGSizeMake(CHAT_HEAD_DIMENSION, CGFLOAT_MAX)];
             CGRect frame = self.badge.frame;
