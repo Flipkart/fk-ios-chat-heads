@@ -62,6 +62,8 @@
 
 @protocol FCChatHeadsControllerDelegate <NSObject>
 
+- (void)chatHeadsControllerDidDisplayChatView:(FCChatHeadsController *)chatHeadsController;
+- (void)chatHeadsController:(FCChatHeadsController *)chController willDismissPopoverForChatID:(NSString *)chatID;
 - (void)chatHeadsController:(FCChatHeadsController *)chController didDismissPopoverForChatID:(NSString *)chatID;
 - (void)chatHeadsController:(FCChatHeadsController *)chController didRemoveChatHeadWithChatID:(NSString *)chatID;
 
