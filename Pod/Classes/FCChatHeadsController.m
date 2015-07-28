@@ -892,7 +892,7 @@ static FCChatHeadsController *_chatHeadsController;
     self.popoverView.borderColor = [UIColor clearColor];
     self.popoverView.borderWidth = 0.0f;
     self.popoverView.preferredPointDirection = PointDirectionUp;
-    [self.popoverView presentPointingAtView:self.activeChatHead inView:self.headSuperView animated:YES];
+    [self.popoverView presentPointingAtView:self.activeChatHead inView:self.headSuperView animated:NO];
 }
 
 - (void)dismissPopover
