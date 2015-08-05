@@ -796,10 +796,10 @@ static FCChatHeadsController *_chatHeadsController;
         return;
     }
     
-    self.chatHeadsTransitioning = YES;
-    
     if (!self.isExpanded)
     {
+        self.chatHeadsTransitioning = YES;
+        
         [self insertBackgroundView:YES];
         
         self.isExpanded = YES;
@@ -814,6 +814,8 @@ static FCChatHeadsController *_chatHeadsController;
     {
         if (chatHead == self.activeChatHead)
         {
+            self.chatHeadsTransitioning = YES;
+            
             [self removeBackgroundView:YES];
             
             self.isExpanded = NO;
