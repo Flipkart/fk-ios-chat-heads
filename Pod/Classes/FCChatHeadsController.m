@@ -42,6 +42,8 @@ static FCChatHeadsController *_chatHeadsController;
 
 @property (nonatomic, strong) NSMutableArray *pendingChatHeads;
 
+@property (nonatomic, assign) BOOL chatHeadsTransitioning;
+
 @end
 
 
@@ -337,7 +339,11 @@ static FCChatHeadsController *_chatHeadsController;
     if (chatHead)
     {
         success = YES;
-        [self bringChatHeadToTop:chatHead animated:animated];
+        
+        if (!chatHead.animating)
+        {
+            [self bringChatHeadToTop:chatHead animated:animated];
+        }
     }
     return success;
 }
@@ -418,7 +424,7 @@ static FCChatHeadsController *_chatHeadsController;
 }
 
 
-- (void)layoutChatHeads:(BOOL)animated
+- (void)layoutChatHeads:(BOOL)animated completion:(void(^)(BOOL finished))completion
 {
     if (!self.isExpanded)
     {
@@ -447,6 +453,13 @@ static FCChatHeadsController *_chatHeadsController;
                 [UIView animateWithDuration:0.357f
                                  animations:^{
                                      [chatHead setFrame:frame];
+                                 }
+                                 completion:^(BOOL finished) {
+                                     
+                                     if ((count == 0) && completion)
+                                     {
+                                         completion(finished);
+                                     }
                                  }];
             }
             else
@@ -455,11 +468,18 @@ static FCChatHeadsController *_chatHeadsController;
             frame.origin.x += CHAT_HEAD_STACK_STEP_X;
             frame.origin.y += CHAT_HEAD_STACK_STEP_Y;
         }
+        
+        if (!animated && completion)
+        {
+            completion(YES);
+        }
     }
     else
     {
         CGRect frame = DEFAULT_CHAT_HEAD_FRAME;
         frame.origin.y = CHAT_HEAD_MARGIN_Y;
+        
+        NSInteger count = self.chatHeads.count - 1;
         
         for (FCChatHead *chatHead in self.chatHeads)
         {
@@ -474,16 +494,35 @@ static FCChatHeadsController *_chatHeadsController;
                                      [chatHead setFrame:frame];
                                  }
                                  completion:^(BOOL finished) {
+                                     
                                      if (!self.popoverView)
                                      {
                                          [self presentPopover];
+                                     }
+                                     
+                                     if ((count == 0) && completion)
+                                     {
+                                         completion(finished);
                                      }
                                  }];
             }
             else
                 [chatHead setFrame:frame];
+            
+            count--;
+        }
+        
+        if (!animated && completion)
+        {
+            completion(YES);
         }
     }
+}
+
+
+- (void)layoutChatHeads:(BOOL)animated
+{
+    [self layoutChatHeads:animated completion:nil];
 }
 
 
@@ -752,6 +791,13 @@ static FCChatHeadsController *_chatHeadsController;
 
 - (void)handleTapOnChatHead:(FCChatHead *)chatHead
 {
+    if (self.chatHeadsTransitioning)
+    {
+        return;
+    }
+    
+    self.chatHeadsTransitioning = YES;
+    
     if (!self.isExpanded)
     {
         [self insertBackgroundView:YES];
@@ -759,7 +805,10 @@ static FCChatHeadsController *_chatHeadsController;
         self.isExpanded = YES;
         _activeChatHeadFrameInStack = self.activeChatHead.frame;
         
-        [self layoutChatHeads:YES];
+        [self layoutChatHeads:YES completion:^(BOOL finished) {
+            
+            self.chatHeadsTransitioning = NO;
+        }];
     }
     else
     {
@@ -769,7 +818,10 @@ static FCChatHeadsController *_chatHeadsController;
             
             self.isExpanded = NO;
             
-            [self layoutChatHeads:YES];
+            [self layoutChatHeads:YES completion:^(BOOL finished) {
+                
+                self.chatHeadsTransitioning = NO;
+            }];
             
             [self dismissPopover];
         }
@@ -789,6 +841,11 @@ static FCChatHeadsController *_chatHeadsController;
 
 - (void)handleTapOnBackground:(UITapGestureRecognizer *)tap
 {
+    if (self.chatHeadsTransitioning)
+    {
+        return;
+    }
+    
     [self handleTapOnChatHead:self.activeChatHead];
 }
 

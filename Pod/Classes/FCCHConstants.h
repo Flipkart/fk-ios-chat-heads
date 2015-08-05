@@ -16,7 +16,7 @@
 #define CHAT_HEAD_DECELERATION_X        1200.0
 #define CHAT_HEAD_DECELERATION_Y        1200.0
 #define CHAT_HEAD_DECELERATION          {CHAT_HEAD_DECELERATION_X, CHAT_HEAD_DECELERATION_Y};
-#define CHAT_HEAD_MARGIN_X              5.0
+#define CHAT_HEAD_MARGIN_X              15.0
 #define CHAT_HEAD_MARGIN_Y              20.0
 
 

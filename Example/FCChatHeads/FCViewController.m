@@ -39,15 +39,43 @@
     ChatHeadsController.datasource = self;
     
     
-//    [NSTimer scheduledTimerWithTimeInterval:2
-//                                     target:self
-//                                   selector:@selector(handleTap:)
-//                                   userInfo:nil
-//                                    repeats:YES];
+    [NSTimer scheduledTimerWithTimeInterval:0.01
+                                     target:self
+                                   selector:@selector(bombard:)
+                                   userInfo:nil
+                                    repeats:YES];
+}
+
+int unreadCount;
+bool stopBombarding;
+
+- (void)bombard:(NSTimer *)timer
+{
+    if (stopBombarding)
+    {
+        return;
+    }
+    
+    NSString *imageName = [NSString stringWithFormat:@"%lu", (unsigned long)_index + 1];
+    
+    //    UIView *view = [[UIView alloc] initWithFrame:DEFAULT_CHAT_HEAD_FRAME];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName]];
+    imageView.frame = CGRectMake(0, 0, 40, 40);
+    //    imageView.frame = DEFAULT_CHAT_HEAD_FRAME;
+    //    imageView.contentMode = UIViewContentModeScaleToFill;
+    imageView.layer.cornerRadius = CGRectGetHeight(imageView.bounds)/2;
+    imageView.layer.masksToBounds = YES;
+    //    [view addSubview:imageView];
+    
+    //    [ChatHeadsController presentChatHeadWithImage:[UIImage imageNamed:imageName] chatID:imageName];
+    [ChatHeadsController presentChatHeadWithView:imageView chatID:imageName];
+    [ChatHeadsController setUnreadCount:unreadCount++ forChatHeadWithChatID:imageName];
 }
 
 - (void)handleTap:(UITapGestureRecognizer *)tap
 {
+    stopBombarding = YES;
+    
     if (_index%2 == 0)
     {
         NSString *imageName = [NSString stringWithFormat:@"%lu", (unsigned long)_index++%6 + 1];
