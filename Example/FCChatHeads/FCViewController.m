@@ -39,11 +39,11 @@
     ChatHeadsController.datasource = self;
     
     
-    [NSTimer scheduledTimerWithTimeInterval:0.01
-                                     target:self
-                                   selector:@selector(bombard:)
-                                   userInfo:nil
-                                    repeats:YES];
+//    [NSTimer scheduledTimerWithTimeInterval:0.01
+//                                     target:self
+//                                   selector:@selector(bombard:)
+//                                   userInfo:nil
+//                                    repeats:YES];
 }
 
 int unreadCount;

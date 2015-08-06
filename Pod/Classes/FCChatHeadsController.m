@@ -807,7 +807,8 @@ static FCChatHeadsController *_chatHeadsController;
         
         [self layoutChatHeads:YES completion:^(BOOL finished) {
             
-            self.chatHeadsTransitioning = NO;
+            [self performSelector:@selector(setChatHeadsTransitioning:) withObject:[NSNumber numberWithBool:NO] afterDelay:0.2];
+//            self.chatHeadsTransitioning = NO;
         }];
     }
     else
@@ -822,7 +823,8 @@ static FCChatHeadsController *_chatHeadsController;
             
             [self layoutChatHeads:YES completion:^(BOOL finished) {
                 
-                self.chatHeadsTransitioning = NO;
+                [self performSelector:@selector(setChatHeadsTransitioning:) withObject:[NSNumber numberWithBool:NO] afterDelay:0.2];
+//                self.chatHeadsTransitioning = NO;
             }];
             
             [self dismissPopover];
