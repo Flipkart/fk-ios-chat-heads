@@ -22,6 +22,9 @@
 		26752B6C9FC2EA9B775E9664 /* FCChatHead.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A82EAC84819945B1F119A52 /* FCChatHead.h */; };
 		26AD9F012A1770862EED72F7 /* FCCHConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 712A41BCE3779C20A84C3FD2 /* FCCHConstants.m */; };
 		28E4BC77DC755232F7241E70 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43CE8BB63E2C939EBAA2AFC5 /* Foundation.framework */; };
+		31BA65511B78AD6900988E12 /* dismiss.png in Resources */ = {isa = PBXBuildFile; fileRef = 31BA654E1B78AD6900988E12 /* dismiss.png */; };
+		31BA65521B78AD6900988E12 /* dismiss@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 31BA654F1B78AD6900988E12 /* dismiss@2x.png */; };
+		31BA65531B78AD6900988E12 /* dismiss@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 31BA65501B78AD6900988E12 /* dismiss@3x.png */; };
 		338136AEA88307CCFF45756A /* POPAnimatableProperty.h in Headers */ = {isa = PBXBuildFile; fileRef = C13F118736B9B429AC3890FC /* POPAnimatableProperty.h */; };
 		34A1B4C2E002BD97CA7FDA8A /* Pods-Tests-pop-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 15439FDB131851733F16692E /* Pods-Tests-pop-dummy.m */; };
 		35D9ADD8C64D5E14FDB54E35 /* Pods-FCChatHeads-pop-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AFE95353B7BCC3124CE2F09 /* Pods-FCChatHeads-pop-dummy.m */; };
@@ -67,7 +70,6 @@
 		6CB70BC42CF2603347417978 /* POPMath.h in Headers */ = {isa = PBXBuildFile; fileRef = 2892AA450F7341D67ADE94F5 /* POPMath.h */; };
 		6D79E0AA4376B6ECCA244E64 /* FCChatHeadsDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 49F0F4FF9ADAB1AABDE601D5 /* FCChatHeadsDelegate.h */; };
 		7099DE034A5DF60690AEDEBE /* POPDecayAnimation.mm in Sources */ = {isa = PBXBuildFile; fileRef = A241B81381FA27DBD6E0C231 /* POPDecayAnimation.mm */; };
-		71296E5B57030A9B9693AFD3 /* ChatHeadSinkCross@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C04AE4F62820E9BAC9B84CDF /* ChatHeadSinkCross@2x.png */; };
 		732FD82903DFA1B122A76310 /* POPAnimationTracerInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = D9A4999BE7D19CEDB4E4DA6F /* POPAnimationTracerInternal.h */; };
 		73E31662CB20D3B09DED4958 /* POPAnimationRuntime.h in Headers */ = {isa = PBXBuildFile; fileRef = F4B93790FFAEFEEC58009BEF /* POPAnimationRuntime.h */; };
 		78405A6E580AC35DE57F3C08 /* POPLayerExtras.h in Headers */ = {isa = PBXBuildFile; fileRef = 52293E83FE7CDAA8D1B68758 /* POPLayerExtras.h */; };
@@ -118,7 +120,6 @@
 		B1868A9D0163AA92622B946A /* FCChatHead.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F3BD715B130AEEDF38DD8B9 /* FCChatHead.m */; };
 		B3D07892EC8CA4E2C50C5BE7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7469A329250E2861D4E009B3 /* UIKit.framework */; };
 		B4897C5D41A6723D5778DDE1 /* POPAnimator.h in Headers */ = {isa = PBXBuildFile; fileRef = B1376D37FCAAA7F57EAB0A7E /* POPAnimator.h */; };
-		B6F3B7229AA2346ADED73BD2 /* ChatHeadSinkCross@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C04AE4F62820E9BAC9B84CDF /* ChatHeadSinkCross@2x.png */; };
 		B7744DE6D55B3FF7404866A0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43CE8BB63E2C939EBAA2AFC5 /* Foundation.framework */; };
 		B8B11AE1E26F4CA9ED6FAAA6 /* FCCHConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 13F1577C2E5CA1205A703487 /* FCCHConstants.h */; };
 		B96A440B50F7DCB49C03F8E7 /* TransformationMatrix.h in Headers */ = {isa = PBXBuildFile; fileRef = 1D99F4CE207EFBE07976F432 /* TransformationMatrix.h */; };
@@ -255,6 +256,9 @@
 		27C7F49B1FF2C21CB27463E6 /* Pods-Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Tests.release.xcconfig"; sourceTree = "<group>"; };
 		27F89CE5435378CB2DD6DE54 /* Pods-FCChatHeads-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-FCChatHeads-dummy.m"; sourceTree = "<group>"; };
 		2892AA450F7341D67ADE94F5 /* POPMath.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = POPMath.h; path = pop/POPMath.h; sourceTree = "<group>"; };
+		31BA654E1B78AD6900988E12 /* dismiss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dismiss.png; sourceTree = "<group>"; };
+		31BA654F1B78AD6900988E12 /* dismiss@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dismiss@2x.png"; sourceTree = "<group>"; };
+		31BA65501B78AD6900988E12 /* dismiss@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dismiss@3x.png"; sourceTree = "<group>"; };
 		326C0D5573BAF5E51986BC76 /* Pods-Tests-pop.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests-pop.xcconfig"; path = "../Pods-Tests-pop/Pods-Tests-pop.xcconfig"; sourceTree = "<group>"; };
 		32D57EDBBCA6299769EBE19B /* POPBasicAnimationInternal.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = POPBasicAnimationInternal.h; path = pop/POPBasicAnimationInternal.h; sourceTree = "<group>"; };
 		3415A8DA197657290343D2B3 /* Pods-Tests-environment.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Tests-environment.h"; sourceTree = "<group>"; };
@@ -326,7 +330,6 @@
 		BD291C5EA808CF0709CDF32E /* libPods-Tests-pop.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Tests-pop.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDE0E67D3C5539C11B023240 /* POPCGUtils.mm */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.objcpp; name = POPCGUtils.mm; path = pop/POPCGUtils.mm; sourceTree = "<group>"; };
 		BE5D8E71EDD290BEDC413D48 /* FCChatHeadsController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = FCChatHeadsController.m; sourceTree = "<group>"; };
-		C04AE4F62820E9BAC9B84CDF /* ChatHeadSinkCross@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "ChatHeadSinkCross@2x.png"; sourceTree = "<group>"; };
 		C13F118736B9B429AC3890FC /* POPAnimatableProperty.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = POPAnimatableProperty.h; path = pop/POPAnimatableProperty.h; sourceTree = "<group>"; };
 		C442AB5B659441C63600F357 /* Pods-FCChatHeads-CMPopTipView.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FCChatHeads-CMPopTipView.xcconfig"; sourceTree = "<group>"; };
 		C8AF550A85422F6760CECA3B /* POPDecayAnimationInternal.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = POPDecayAnimationInternal.h; path = pop/POPDecayAnimationInternal.h; sourceTree = "<group>"; };
@@ -629,7 +632,9 @@
 		AE8E3F79427F41D545D3D132 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				C04AE4F62820E9BAC9B84CDF /* ChatHeadSinkCross@2x.png */,
+				31BA654E1B78AD6900988E12 /* dismiss.png */,
+				31BA654F1B78AD6900988E12 /* dismiss@2x.png */,
+				31BA65501B78AD6900988E12 /* dismiss@3x.png */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -1064,7 +1069,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B6F3B7229AA2346ADED73BD2 /* ChatHeadSinkCross@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1072,7 +1076,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				71296E5B57030A9B9693AFD3 /* ChatHeadSinkCross@2x.png in Resources */,
+				31BA65531B78AD6900988E12 /* dismiss@3x.png in Resources */,
+				31BA65511B78AD6900988E12 /* dismiss.png in Resources */,
+				31BA65521B78AD6900988E12 /* dismiss@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1196,7 +1196,7 @@ static FCChatHeadsController *_chatHeadsController;
                                      CHAT_HEAD_SINK_HEIGHT);
     self.sinkView.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.75];
     
-    UIImage *sinkCrossImage = [UIImage imageNamed:@"FCChatHeads.bundle/ChatHeadSinkCross"];
+    UIImage *sinkCrossImage = [UIImage imageNamed:@"FCChatHeads.bundle/dismiss"];
     self.sinkCross = [[UIImageView alloc] initWithImage:sinkCrossImage];
     CGRect sinkCrossFrame = CGRectMake(CGRectGetMinX(self.sinkView.frame) + (self.sinkView.frame.size.width - sinkCrossImage.size.width)/2,
                                        CGRectGetMinY(self.sinkView.frame) + (self.sinkView.frame.size.height - sinkCrossImage.size.height)/2,
