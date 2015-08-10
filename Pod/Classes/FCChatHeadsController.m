@@ -807,8 +807,13 @@ static FCChatHeadsController *_chatHeadsController;
         
         [self layoutChatHeads:YES completion:^(BOOL finished) {
             
-            [self performSelector:@selector(setChatHeadsTransitioning:) withObject:[NSNumber numberWithBool:NO] afterDelay:0.2];
-//            self.chatHeadsTransitioning = NO;
+            [NSTimer scheduledTimerWithTimeInterval:0.2
+                                             target:self
+                                           selector:@selector(resetTransitioning:)
+                                           userInfo:nil
+                                            repeats:NO];
+            //            [self performSelector:@selector(setChatHeadsTransitioning:) withObject:[NSNumber numberWithBool:NO] afterDelay:0.2];
+            //            self.chatHeadsTransitioning = NO;
         }];
     }
     else
@@ -823,8 +828,13 @@ static FCChatHeadsController *_chatHeadsController;
             
             [self layoutChatHeads:YES completion:^(BOOL finished) {
                 
-                [self performSelector:@selector(setChatHeadsTransitioning:) withObject:[NSNumber numberWithBool:NO] afterDelay:0.2];
-//                self.chatHeadsTransitioning = NO;
+                [NSTimer scheduledTimerWithTimeInterval:0.2
+                                                 target:self
+                                               selector:@selector(resetTransitioning:)
+                                               userInfo:nil
+                                                repeats:NO];
+                //                [self performSelector:@selector(setChatHeadsTransitioning:) withObject:[NSNumber numberWithBool:NO] afterDelay:0.2];
+                //                self.chatHeadsTransitioning = NO;
             }];
             
             [self dismissPopover];
@@ -1181,6 +1191,10 @@ static FCChatHeadsController *_chatHeadsController;
     [self showSink:YES];
 }
 
+- (void)resetTransitioning:(NSTimer *)timer
+{
+    self.chatHeadsTransitioning = NO;
+}
 
 #pragma mark -
 #pragma mark - Sink methods
