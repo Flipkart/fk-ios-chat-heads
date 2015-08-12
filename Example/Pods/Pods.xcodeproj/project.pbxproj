@@ -123,6 +123,7 @@
 		B7744DE6D55B3FF7404866A0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43CE8BB63E2C939EBAA2AFC5 /* Foundation.framework */; };
 		B8B11AE1E26F4CA9ED6FAAA6 /* FCCHConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 13F1577C2E5CA1205A703487 /* FCCHConstants.h */; };
 		B96A440B50F7DCB49C03F8E7 /* TransformationMatrix.h in Headers */ = {isa = PBXBuildFile; fileRef = 1D99F4CE207EFBE07976F432 /* TransformationMatrix.h */; };
+		BBAB2F371B7BF834006BB79F /* FCPopOverView.m in Sources */ = {isa = PBXBuildFile; fileRef = BBAB2F361B7BF834006BB79F /* FCPopOverView.m */; };
 		BDAA02AAE399CFCA78A0C2EF /* POPAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 22C3E3D9B1B333D49492771C /* POPAnimation.h */; };
 		C02352485C60AABE646CD51F /* POPVector.h in Headers */ = {isa = PBXBuildFile; fileRef = AE05E6FAB8998B7C4F8BC957 /* POPVector.h */; };
 		C10D5EF6053B11BD4CB9E41C /* POPLayerExtras.mm in Sources */ = {isa = PBXBuildFile; fileRef = B162BD23C0BB2013F144BE46 /* POPLayerExtras.mm */; };
@@ -327,6 +328,8 @@
 		B9BE4A38943D159436BDA7E9 /* POPMath.mm */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.objcpp; name = POPMath.mm; path = pop/POPMath.mm; sourceTree = "<group>"; };
 		B9F8E92DA5EC5C168FA334BD /* Pods-Tests-pop-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests-pop-Private.xcconfig"; path = "../Pods-Tests-pop/Pods-Tests-pop-Private.xcconfig"; sourceTree = "<group>"; };
 		BB07B0D8B9C62B59F8D2D1E5 /* POPAnimatableProperty.mm */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.objcpp; name = POPAnimatableProperty.mm; path = pop/POPAnimatableProperty.mm; sourceTree = "<group>"; };
+		BBAB2F351B7BF834006BB79F /* FCPopOverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCPopOverView.h; sourceTree = "<group>"; };
+		BBAB2F361B7BF834006BB79F /* FCPopOverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCPopOverView.m; sourceTree = "<group>"; };
 		BD291C5EA808CF0709CDF32E /* libPods-Tests-pop.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Tests-pop.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDE0E67D3C5539C11B023240 /* POPCGUtils.mm */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.objcpp; name = POPCGUtils.mm; path = pop/POPCGUtils.mm; sourceTree = "<group>"; };
 		BE5D8E71EDD290BEDC413D48 /* FCChatHeadsController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = FCChatHeadsController.m; sourceTree = "<group>"; };
@@ -697,6 +700,8 @@
 				38944FBC53A1D668295E167A /* FCChatHeadsController.h */,
 				BE5D8E71EDD290BEDC413D48 /* FCChatHeadsController.m */,
 				49F0F4FF9ADAB1AABDE601D5 /* FCChatHeadsDelegate.h */,
+				BBAB2F351B7BF834006BB79F /* FCPopOverView.h */,
+				BBAB2F361B7BF834006BB79F /* FCPopOverView.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -1197,6 +1202,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E04B59D627E856E879AF7B95 /* Pods-FCChatHeads-dummy.m in Sources */,
+				BBAB2F371B7BF834006BB79F /* FCPopOverView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

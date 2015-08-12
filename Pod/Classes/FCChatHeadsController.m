@@ -10,6 +10,7 @@
 #import "FCChatHead.h"
 #import <CMPopTipView/CMPopTipView.h>
 #import <pop/POP.h>
+#import "FCPopOverView.h"
 
 
 static FCChatHeadsController *_chatHeadsController;
@@ -30,7 +31,7 @@ static FCChatHeadsController *_chatHeadsController;
 
 @property (nonatomic, strong) UIView *sinkView;
 
-@property (nonatomic, strong) CMPopTipView *popoverView;
+@property (nonatomic, strong) FCPopOverView *popoverView;
 
 @property (nonatomic, strong) UIView *backgroundView;
 
@@ -930,8 +931,8 @@ static FCChatHeadsController *_chatHeadsController;
 {
     [self dismissPopover];
     
-    CGRect frame = [[[[[UIApplication sharedApplication] delegate] window] screen] applicationFrame];
-    frame.size.height -= CGRectGetMaxY(self.activeChatHead.frame);
+    CGRect frame = [[[[[UIApplication sharedApplication] delegate] window] screen] bounds];
+    frame.size.height -= CGRectGetMaxY(self.activeChatHead.frame) + 8.0;
     
     UIView *contentView = nil;
     if (self.datasource && [self.datasource respondsToSelector:@selector(chatHeadsController:viewForPopoverForChatHeadWithChatID:)])
@@ -942,15 +943,16 @@ static FCChatHeadsController *_chatHeadsController;
     
     if (contentView)
     {
-        self.popoverView = [[CMPopTipView alloc] initWithCustomView:contentView];
+        self.popoverView = [[FCPopOverView alloc] initWithCustomView:contentView];
     }
     else
     {
-        self.popoverView = [[CMPopTipView alloc] initWithTitle:self.activeChatHead.chatID message:@"Your detail view goes here."];
+        self.popoverView = [[FCPopOverView alloc] initWithTitle:self.activeChatHead.chatID message:@"Your detail view goes here."];
         self.popoverView.titleColor = [UIColor blackColor];
         self.popoverView.textColor = [UIColor blackColor];
     }
     
+    self.popoverView.pointerSize = 8.0;
     self.popoverView.sidePadding = 0.0;
     self.popoverView.topMargin = 0.0;
     self.popoverView.cornerRadius = 0.0;
