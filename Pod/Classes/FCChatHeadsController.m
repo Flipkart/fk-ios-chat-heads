@@ -944,34 +944,28 @@ static FCChatHeadsController *_chatHeadsController;
     if (contentView)
     {
         self.popoverView = [[FCPopOverView alloc] initWithCustomView:contentView];
-    }
-    else
-    {
-        self.popoverView = [[FCPopOverView alloc] initWithTitle:self.activeChatHead.chatID message:@"Your detail view goes here."];
-        self.popoverView.titleColor = [UIColor blackColor];
-        self.popoverView.textColor = [UIColor blackColor];
-    }
-    
-    self.popoverView.pointerSize = 8.0;
-    self.popoverView.sidePadding = 0.0;
-    self.popoverView.topMargin = 0.0;
-    self.popoverView.cornerRadius = 0.0;
-    //    self.popoverView.bubblePaddingX = -self.popoverView.cornerRadius;
-    //    self.popoverView.bubblePaddingY = 0.0;
-    self.popoverView.delegate = self;
-    self.popoverView.backgroundColor = [UIColor whiteColor];
-    self.popoverView.has3DStyle = NO;
-    self.popoverView.animation = CMPopTipAnimationSlide;
-    self.popoverView.hasGradientBackground = NO;
-    self.popoverView.disableTapToDismiss = YES;
-    self.popoverView.borderColor = [UIColor clearColor];
-    self.popoverView.borderWidth = 0.0f;
-    self.popoverView.preferredPointDirection = PointDirectionUp;
-    [self.popoverView presentPointingAtView:self.activeChatHead inView:self.headSuperView animated:NO];
-    
-    if (self.delegate && [self.delegate respondsToSelector:@selector(chatHeadsControllerDidDisplayChatView:)])
-    {
-        [self.delegate chatHeadsControllerDidDisplayChatView:self];
+        
+        self.popoverView.pointerSize = 8.0;
+        self.popoverView.sidePadding = 0.0;
+        self.popoverView.topMargin = 0.0;
+        self.popoverView.cornerRadius = 0.0;
+        //    self.popoverView.bubblePaddingX = -self.popoverView.cornerRadius;
+        //    self.popoverView.bubblePaddingY = 0.0;
+        self.popoverView.delegate = self;
+        self.popoverView.backgroundColor = [UIColor whiteColor];
+        self.popoverView.has3DStyle = NO;
+        self.popoverView.animation = CMPopTipAnimationSlide;
+        self.popoverView.hasGradientBackground = NO;
+        self.popoverView.disableTapToDismiss = YES;
+        self.popoverView.borderColor = [UIColor clearColor];
+        self.popoverView.borderWidth = 0.0f;
+        self.popoverView.preferredPointDirection = PointDirectionUp;
+        [self.popoverView presentPointingAtView:self.activeChatHead inView:self.headSuperView animated:NO];
+        
+        if (self.delegate && [self.delegate respondsToSelector:@selector(chatHeadsControllerDidDisplayChatView:)])
+        {
+            [self.delegate chatHeadsControllerDidDisplayChatView:self];
+        }
     }
 }
 
