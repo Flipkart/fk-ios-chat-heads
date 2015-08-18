@@ -861,7 +861,14 @@ static FCChatHeadsController *_chatHeadsController;
         return;
     }
     
-    [self handleTapOnChatHead:self.activeChatHead];
+    if (self.activeChatHead == nil)
+    {
+        [self removeBackgroundView:YES];
+        self.isExpanded = !self.isExpanded;
+        [self dismissPopover];
+    }
+    else
+        [self handleTapOnChatHead:self.activeChatHead];
 }
 
 - (void)insertBackgroundView:(BOOL)animated
