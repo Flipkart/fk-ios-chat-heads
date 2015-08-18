@@ -585,7 +585,9 @@
 	UIView *containerView = [targetSuperview superview];
 	
 	if (nil == containerView) {
+#if DEBUG
 		NSLog(@"Cannot determine container view from UIBarButtonItem: %@", barButtonItem);
+#endif
 		self.targetObject = nil;
 		return;
 	}

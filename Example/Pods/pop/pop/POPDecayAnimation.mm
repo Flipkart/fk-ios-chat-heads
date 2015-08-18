@@ -71,7 +71,9 @@ DEFINE_RW_PROPERTY(POPDecayAnimationState, deceleration, setDeceleration:, CGFlo
 - (void)setToValue:(id)aValue
 {
   // no-op
+#if DEBUG
   NSLog(@"ignoring to value on decay animation %@", self);
+#endif
 }
 
 - (id)reversedVelocity

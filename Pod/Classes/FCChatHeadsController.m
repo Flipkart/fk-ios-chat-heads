@@ -204,12 +204,14 @@ static FCChatHeadsController *_chatHeadsController;
 
 - (void)logChatHeadsStack
 {
+#if DEBUG
     NSLog(@"=====================================================================================\n\n");
     for (int count = 0; count < self.chatHeads.count; count++)
     {
         NSLog(@"index = %d, chat head ID = %@", count, [self.chatHeads[count] chatID]);
     }
     NSLog(@"\n=====================================================================================\n\n");
+#endif
 }
 
 - (void)setIndentationLevelsForNewChatHead:(FCChatHead *)chatHead

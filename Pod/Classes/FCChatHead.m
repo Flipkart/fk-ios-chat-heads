@@ -172,8 +172,9 @@
 {
     if (pan != _panGesture)
         return;
-    
+#if DEBUG
     NSLog(@"%s", __func__);
+#endif
     _didPan = YES;
     
     if (self.delegate && [self.delegate respondsToSelector:@selector(chatHead:didObservePan:)]) {
@@ -183,7 +184,9 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
+#if DEBUG
     NSLog(@"%s", __func__);
+#endif
     [super touchesBegan:touches withEvent:event];
     
     _didPan = NO;

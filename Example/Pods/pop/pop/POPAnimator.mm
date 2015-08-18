@@ -478,8 +478,9 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
     if (state->active && !state->paused) {
       // object exists; animate
       applyAnimationTime(obj, state, time);
-
+#ifdef DEBUG
       FBLogAnimDebug(@"time:%f running:%@", time, item->animation);
+#endif
       if (state->isDone()) {
         // set end value
         applyAnimationToValue(obj, state);
