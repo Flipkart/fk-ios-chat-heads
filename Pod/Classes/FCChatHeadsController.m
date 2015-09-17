@@ -11,6 +11,7 @@
 #import <CMPopTipView/CMPopTipView.h>
 #import <pop/POP.h>
 #import "FCPopOverView.h"
+#import "FCSinkView.h"
 
 
 static FCChatHeadsController *_chatHeadsController;
@@ -29,7 +30,7 @@ static FCChatHeadsController *_chatHeadsController;
 @property (nonatomic, strong) NSMutableArray *chatHeads;
 @property (nonatomic, strong) NSTimer *showChatHeadSinkTimer;
 
-@property (nonatomic, strong) UIView *sinkView;
+@property (nonatomic, strong) FCSinkView *sinkView;
 
 @property (nonatomic, strong) FCPopOverView *popoverView;
 
@@ -1208,12 +1209,13 @@ static FCChatHeadsController *_chatHeadsController;
 {
     [self removeSink:NO];
     
-    self.sinkView = [UIView new];
+    self.sinkView = [FCSinkView new];
     self.sinkView.frame = CGRectMake(self.headSuperView.bounds.origin.x,
                                      self.headSuperView.bounds.size.height - CHAT_HEAD_SINK_HEIGHT,
                                      self.headSuperView.bounds.size.width,
                                      CHAT_HEAD_SINK_HEIGHT);
-    self.sinkView.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.75];
+    
+    self.sinkView.backgroundColor = [UIColor clearColor];
     
     UIImage *sinkCrossImage = [UIImage imageNamed:@"FCChatHeads.bundle/dismiss"];
     self.sinkCross = [[UIImageView alloc] initWithImage:sinkCrossImage];
