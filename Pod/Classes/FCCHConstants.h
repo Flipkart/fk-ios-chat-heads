@@ -9,8 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-
-#define CHAT_HEAD_DIMENSION             (CGRectGetWidth([[UIScreen mainScreen] bounds])*(50.0/320.0))
+#define CHAT_HEAD_DIMENSION             MIN((CGRectGetWidth([[UIScreen mainScreen] bounds])*(50.0/320.0)), 65.0)
 #define CHAT_HEAD_IMAGE_INSET           0.0
 #define CHAT_HEAD_SHADOW_RADIUS         2.0
 #define CHAT_HEAD_DECELERATION_X        1200.0
