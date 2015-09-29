@@ -80,6 +80,8 @@
 {
     self.backgroundColor = [UIColor clearColor];
     
+    self.exclusiveTouch = YES;
+    
     //    CGRect bounds = self.bounds;
     //    double radius = self.circular ? CGRectGetHeight(bounds)/2 : 0.0;
     //
