@@ -9,16 +9,15 @@
 
 Pod::Spec.new do |s|
   s.name             = "FCChatHeads"
-  s.version          = "1.0"
-  s.summary          = "Chat heads like facebook messanger"
+  s.version          = "1.0.1"
+  s.summary          = "Library to use chat heads within your iOS app."
   s.description      = <<-DESC
-                        Chat heads implemented for iOS using POP.
+                        Library to use chat heads within your iOS app with complete physics and animations which drive multi user chat behaviour to support collapsed/stacked or expanded states.
                         DESC
-  s.homepage         = "https://github.com/Flipkart/fk-ios-chat-heads"
-  s.license          = 'MIT'
+  s.homepage         = "git@github.com:Flipkart/fk-ios-chat-heads"
+  s.license          = 'Apache License Version 2.0'
   s.author           = { "Rajat Gupta" => "rajat.g@flipkart.com" }
   s.source           = { :git => "https://github.com/Flipkart/fk-ios-chat-heads.git", :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.platform     = :ios, '6.0'
   s.requires_arc = true
@@ -28,7 +27,6 @@ Pod::Spec.new do |s|
     'FCChatHeads' => ['Pod/Assets/*.png']
   }
 
-  # s.public_header_files = 'Pod/Classes/**/*.h'
   s.frameworks = 'UIKit'
   s.dependency 'pop', '~> 1.0'
   s.dependency 'CMPopTipView'

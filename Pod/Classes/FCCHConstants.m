@@ -1,42 +1,27 @@
 //
-//  FCConstants.m
-//  FCChatHead
+//  Copyright 2014 Flipkart Internet Pvt Ltd
 //
-//  Created by Rajat Gupta on 02/24/2015.
-//  Copyright (c) 2014 Rajat Gupta. All rights reserved.
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
 //
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
+
+
 
 #import "FCCHConstants.h"
 
 
-NSString *ChatHeadAdditionAnimationKey = @"fc.chathead.addition";
-NSString *ChatHeadMotionEndAnimationKey = @"fc.chathead.motionEnd";
-NSString *ChatHeadRemovalAnimationKey = @"fc.chathead.removal";
-
-CGPoint FCPointInvalid = {-10000, -10000};
 
 
-BOOL FCPointsEqual(CGPoint point1, CGPoint point2)
-{
-    BOOL result = (point1.x == point2.x) && (point1.y == point2.y);
-    
-    return result;
-}
+extern FCRay FCRayCreate(CGPoint startPoint, CGPoint toPoint);
 
-
-BOOL FCPointIsInvalid(CGPoint point)
-{
-    return FCPointsEqual(point, FCPointInvalid);
-}
-
-
-
-FCRay FCRayCreate(CGPoint startPoint, CGPoint toPoint)
-{
-    FCRay aRay = {startPoint, toPoint};
-    
-    return aRay;
-}
 
 BOOL FCRayIntersectsWithRect(FCRay ray, CGRect rect)
 {
@@ -70,27 +55,6 @@ BOOL FCRayIntersectsWithRect(FCRay ray, CGRect rect)
     
     return result;
 }
-
-CGPoint FCRayIntersectionPointWithRect(FCRay ray, CGRect rect)
-{
-    CGPoint point = FCPointInvalid;
-    
-    if (FCRayIntersectsWithRect(ray, rect))
-    {
-        
-    }
-    
-    return point;
-}
-
-
-
-
-
-
-
-
-
 
 
 

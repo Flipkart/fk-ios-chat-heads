@@ -1,10 +1,19 @@
 //
-//  FCChatHead.m
-//  FCChatHead
+//  Copyright 2014 Flipkart Internet Pvt Ltd
 //
-//  Created by Rajat Gupta on 02/24/2015.
-//  Copyright (c) 2014 Rajat Gupta. All rights reserved.
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
 //
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
+
+
 
 #import "FCChatHead.h"
 #import <pop/POP.h>
@@ -81,31 +90,7 @@
     self.backgroundColor = [UIColor clearColor];
     
     self.exclusiveTouch = YES;
-    
-    //    CGRect bounds = self.bounds;
-    //    double radius = self.circular ? CGRectGetHeight(bounds)/2 : 0.0;
-    //
-    //    self.layer.cornerRadius = radius;
-    //
-    //    self.layer.shadowColor = [UIColor colorWithWhite:0.1 alpha:0.9].CGColor;
-    //    self.layer.shadowOpacity = 1.0;
-    //    self.layer.shadowRadius = CHAT_HEAD_SHADOW_RADIUS;
-    //
-    //    if (self.circular)
-    //    {
-    //        CGMutablePathRef shadowPath = CGPathCreateMutable();
-    //        CGPathMoveToPoint(shadowPath, NULL, radius + CHAT_HEAD_SHADOW_RADIUS/2, radius + CHAT_HEAD_SHADOW_RADIUS/2);
-    //
-    //        bounds.origin.x += CHAT_HEAD_SHADOW_RADIUS/2;
-    //        bounds.origin.y += CHAT_HEAD_SHADOW_RADIUS;
-    //
-    //        CGPathAddEllipseInRect(shadowPath, NULL, bounds);
-    //
-    //        self.layer.shadowPath = shadowPath;
-    //
-    //        CGPathRelease(shadowPath);
-    //    }
-    
+        
     if (!_panGesture)
     {
         _panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
@@ -155,16 +140,6 @@
     return _badge;
 }
 
-- (void)setCircular:(BOOL)circular
-{
-    if (_circular != circular)
-    {
-        _circular = circular;
-        
-        [self setup];
-        [self setNeedsDisplay];
-    }
-}
 
 #pragma mark -
 #pragma mark - Touch Event/Gesture handlers
@@ -258,16 +233,12 @@
 // Highlights the touch by giving some visual response to it.
 - (void)highlightTouch
 {
-    //    self.transform = CGAffineTransformMakeScale(0.9, 0.9);
-    //    self.imageView.alpha = 0.8f;
-    //    self.backgroundColor = [UIColor blackColor];
+    // can write code here to update visual state of chat head when touches are received on it
 }
 
 - (void)unhightlight
 {
-    //    self.transform = CGAffineTransformIdentity;
-    //    self.imageView.alpha = 1.0f;
-    //    self.backgroundColor = [UIColor clearColor];
+    // can write code here to revert highlight changes
 }
 
 - (void)setUnreadCount:(NSInteger)unreadCount
@@ -301,7 +272,6 @@
             frame.size.width = MAX(textSize.width + 5, 15.0);
             frame.origin.x = self.frame.size.width - MAX(frame.size.width/2, 15.0);
             self.badge.frame = frame;
-            //            [self.badge sizeToFit];
         }
     }
 }
@@ -318,8 +288,9 @@
 
 - (void)setViewStateForHierarchyLevel:(NSUInteger)hierarchy
 {
-    self.imageView.alpha = 1;//MAX(1.0 - 0.35*hierarchy, 0.05);
-    self.backgroundColor = (hierarchy == 0) ? [UIColor clearColor] : [UIColor clearColor];
+    // Can use this place to set different visual traits for chatheads with different hierarchy
+    self.imageView.alpha = 1;
+    self.backgroundColor = [UIColor clearColor];
     self.userInteractionEnabled = hierarchy == 0;
 }
 
@@ -333,8 +304,6 @@
             _indentationLevel = MAX_NUMBER_OF_CHAT_HEADS;
         else
             _indentationLevel = indentationLevel;
-        
-        //        self.badge.text = [NSString stringWithFormat:@"%lu", (unsigned long)_indentationLevel];
     }
 }
 

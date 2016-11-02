@@ -18,18 +18,12 @@
 		6003F5A1195388D20070C39A /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6003F59F195388D20070C39A /* Main_iPhone.storyboard */; };
 		6003F5A4195388D20070C39A /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5A2195388D20070C39A /* Main_iPad.storyboard */; };
 		6003F5A7195388D20070C39A /* FCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5A6195388D20070C39A /* FCViewController.m */; };
-		6003F5A9195388D20070C39A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5A8195388D20070C39A /* Images.xcassets */; };
 		6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F5AF195388D20070C39A /* XCTest.framework */; };
 		6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
-		BB1523C01AD644A400DBD1EF /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = BB1523BA1AD644A400DBD1EF /* 1.png */; };
-		BB1523C11AD644A400DBD1EF /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = BB1523BB1AD644A400DBD1EF /* 2.png */; };
-		BB1523C21AD644A400DBD1EF /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = BB1523BC1AD644A400DBD1EF /* 3.png */; };
-		BB1523C31AD644A400DBD1EF /* 4.png in Resources */ = {isa = PBXBuildFile; fileRef = BB1523BD1AD644A400DBD1EF /* 4.png */; };
-		BB1523C41AD644A400DBD1EF /* 5.png in Resources */ = {isa = PBXBuildFile; fileRef = BB1523BE1AD644A400DBD1EF /* 5.png */; };
-		BB1523C51AD644A400DBD1EF /* 6.png in Resources */ = {isa = PBXBuildFile; fileRef = BB1523BF1AD644A400DBD1EF /* 6.png */; };
+		BB43FD8A1DB77439005AD10F /* images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB43FD891DB77439005AD10F /* images.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,7 +55,6 @@
 		6003F5A3195388D20070C39A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
 		6003F5A5195388D20070C39A /* FCViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FCViewController.h; sourceTree = "<group>"; };
 		6003F5A6195388D20070C39A /* FCViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FCViewController.m; sourceTree = "<group>"; };
-		6003F5A8195388D20070C39A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		6003F5AE195388D20070C39A /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F5AF195388D20070C39A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		6003F5B7195388D20070C39A /* Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tests-Info.plist"; sourceTree = "<group>"; };
@@ -73,12 +66,7 @@
 		8434A883190F45BFE66B9E33 /* Pods-Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tests/Pods-Tests.release.xcconfig"; sourceTree = "<group>"; };
 		AA94C080EE44AAB350137115 /* FCChatHeads.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = FCChatHeads.podspec; path = ../FCChatHeads.podspec; sourceTree = "<group>"; };
 		B246039F07CF703D54360292 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		BB1523BA1AD644A400DBD1EF /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
-		BB1523BB1AD644A400DBD1EF /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
-		BB1523BC1AD644A400DBD1EF /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3.png; sourceTree = "<group>"; };
-		BB1523BD1AD644A400DBD1EF /* 4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 4.png; sourceTree = "<group>"; };
-		BB1523BE1AD644A400DBD1EF /* 5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 5.png; sourceTree = "<group>"; };
-		BB1523BF1AD644A400DBD1EF /* 6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 6.png; sourceTree = "<group>"; };
+		BB43FD891DB77439005AD10F /* images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = images.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,12 +109,6 @@
 		6003F581195388D10070C39A = {
 			isa = PBXGroup;
 			children = (
-				BB1523BA1AD644A400DBD1EF /* 1.png */,
-				BB1523BB1AD644A400DBD1EF /* 2.png */,
-				BB1523BC1AD644A400DBD1EF /* 3.png */,
-				BB1523BD1AD644A400DBD1EF /* 4.png */,
-				BB1523BE1AD644A400DBD1EF /* 5.png */,
-				BB1523BF1AD644A400DBD1EF /* 6.png */,
 				60FF7A9C1954A5C5007DD14C /* Podspec Metadata */,
 				6003F593195388D20070C39A /* FCChatHeads */,
 				6003F5B5195388D20070C39A /* Tests */,
@@ -167,7 +149,7 @@
 				6003F5A2195388D20070C39A /* Main_iPad.storyboard */,
 				6003F5A5195388D20070C39A /* FCViewController.h */,
 				6003F5A6195388D20070C39A /* FCViewController.m */,
-				6003F5A8195388D20070C39A /* Images.xcassets */,
+				BB43FD891DB77439005AD10F /* images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
 			);
 			path = FCChatHeads;
@@ -294,16 +276,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BB1523C11AD644A400DBD1EF /* 2.png in Resources */,
 				6003F5A4195388D20070C39A /* Main_iPad.storyboard in Resources */,
-				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
+				BB43FD8A1DB77439005AD10F /* images.xcassets in Resources */,
 				6003F5A1195388D20070C39A /* Main_iPhone.storyboard in Resources */,
-				BB1523C51AD644A400DBD1EF /* 6.png in Resources */,
-				BB1523C31AD644A400DBD1EF /* 4.png in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
-				BB1523C41AD644A400DBD1EF /* 5.png in Resources */,
-				BB1523C21AD644A400DBD1EF /* 3.png in Resources */,
-				BB1523C01AD644A400DBD1EF /* 1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
