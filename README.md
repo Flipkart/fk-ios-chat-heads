@@ -1,9 +1,6 @@
 # FCChatHeads
 
-[![CI Status](http://img.shields.io/travis/Rajat Gupta/FCChatHeads.svg?style=flat)](https://travis-ci.org/Rajat Gupta/FCChatHeads)
-[![Version](https://img.shields.io/cocoapods/v/FCChatHeads.svg?style=flat)](http://cocoapods.org/pods/FCChatHeads)
-[![License](https://img.shields.io/cocoapods/l/FCChatHeads.svg?style=flat)](http://cocoapods.org/pods/FCChatHeads)
-[![Platform](https://img.shields.io/cocoapods/p/FCChatHeads.svg?style=flat)](http://cocoapods.org/pods/FCChatHeads)
+Library to use chat heads within your iOS app with complete physics and animations which drive multi user chat behaviour to support collapsed/stacked or expanded states.
 
 # Demo
 ![chat heads demo](/Example/Demo/FCDemo.gif?raw=true)
@@ -12,7 +9,6 @@
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
-## Requirements
 
 ## Installation
 
@@ -22,6 +18,55 @@ it, simply add the following line to your Podfile:
 ```ruby
 pod "FCChatHeads"
 ```
+## Usage
+
+Include the following import in your file
+
+```objective-c
+#import <FCChatHeads/FCChatHeads.h>
+```
+
+### To present chat head with image
+
+```objective-c
+[ChatHeadsController presentChatHeadWithImage:<UIImage instance> chatID:<Unique identifier>];
+```
+
+### To present chat head with view
+
+```objective-c
+[ChatHeadsController presentChatHeadWithView:<UIImage instance> chatID:<Unique identifier>];
+```
+
+### To set badge count on chat head
+
+```objective-c
+[ChatHeadsController setUnreadCount:<Unread count> forChatHeadWithChatID:<Unique identifier>];
+```
+
+### To show view in popover on chat head selection
+
+Set datasource for ChatHeadsController
+
+```objective-c
+[ChatHeadsController setUnreadCount:<Unread count> forChatHeadWithChatID:<Unique identifier>];
+```
+
+Return view from callback
+
+```objective-c
+- (UIView *)chatHeadsController:(FCChatHeadsController *)chatHeadsController viewForPopoverForChatHeadWithChatID:(NSString *)chatID
+{
+    UIView *view = <Create view for presentation>;
+
+    return view;
+}
+
+```
+
+Refer FCChatHeadsController.h for various available options and callbacks. 
+
+
 
 ## Author
 
