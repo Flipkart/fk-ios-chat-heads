@@ -49,7 +49,7 @@ Include the following import in your file
 Set datasource for ChatHeadsController
 
 ```objective-c
-[ChatHeadsController setUnreadCount:<Unread count> forChatHeadWithChatID:<Unique identifier>];
+ChatHeadsController.datasource = <datasource>;
 ```
 
 Return view from callback
@@ -66,6 +66,8 @@ Return view from callback
 
 Refer [FCChatHeadsController.h](Pod/Classes/FCChatHeadsController.h) for more information on how to present or dismiss or hide chatheads.
 For information on callbacks refer FCChatHeadsControllerDatasource and FCChatHeadsControllerDelegate protocols in [FCChatHeadsController.h](Pod/Classes/FCChatHeadsController.h)
+
+Also checkout code in [FCViewController.m](Example/FCChatHeads/FCViewController.m)
 
 
 
