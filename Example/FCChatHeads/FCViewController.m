@@ -29,6 +29,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
+    UIAlertView *instruction = [[UIAlertView alloc] initWithTitle:nil
+                                                          message:@"Double tap on screen to present chat heads"
+                                                         delegate:nil
+                                                cancelButtonTitle:@"OK"
+                                                otherButtonTitles:nil, nil];
+    [instruction show];
+    
     _imageNames = @[@"costanza", @"einstein", @"letterman", @"nigella", @"steve", @"trump"];
     _displayTexts = @[@"\"I'm much more comfortable criticizing people behind their backs.\"", @"\"Two things are infinite: the universe and human stupidity... and I'm not so sure about the universe.\"", @"\"I'm just trying to make a smudge on the collective unconscious.\"", @"\"I don't believe in low fat coooking.\"", @"\"I want to put a ding in the universe.\"", @"\"I know words, I have the best words. I have the best, but there is no better word than stupid.\""];
     
@@ -45,28 +52,8 @@
     [self.view addGestureRecognizer:longPress];
     
     ChatHeadsController.datasource = self;
-    
-    
-    [NSTimer scheduledTimerWithTimeInterval:1
-                                     target:self
-                                   selector:@selector(bombard:)
-                                   userInfo:nil
-                                    repeats:YES];
 }
 
-
-- (void)bombard:(NSTimer *)timer
-{
-    if (_stopBombarding)
-    {
-        return;
-    }
-    
-    NSString *imageName = _imageNames[_index++%_imageNames.count];
-    
-    [ChatHeadsController presentChatHeadWithImage:[UIImage imageNamed:imageName] chatID:imageName];
-    [ChatHeadsController setUnreadCount:_unreadCount++ forChatHeadWithChatID:imageName];
-}
 
 - (void)handleTap:(UITapGestureRecognizer *)tap
 {
@@ -78,6 +65,7 @@
             NSString *imageName = _imageNames[_index%6];
             
             [ChatHeadsController presentChatHeadWithImage:[UIImage imageNamed:imageName] chatID:imageName];
+            [ChatHeadsController setUnreadCount:_unreadCount++ forChatHeadWithChatID:imageName];
             
             _index++;
         }
@@ -94,6 +82,7 @@
             imageView.clipsToBounds = YES;
             
             [ChatHeadsController presentChatHeadWithView:imageView chatID:imageName];
+            [ChatHeadsController setUnreadCount:_unreadCount++ forChatHeadWithChatID:imageName];
             
             _index++;
         }

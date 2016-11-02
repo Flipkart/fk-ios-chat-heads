@@ -143,6 +143,7 @@
 		6003F593195388D20070C39A /* FCChatHeads */ = {
 			isa = PBXGroup;
 			children = (
+				BB43FD8D1DCA046D005AD10F /* Demo */,
 				6003F59C195388D20070C39A /* FCAppDelegate.h */,
 				6003F59D195388D20070C39A /* FCAppDelegate.m */,
 				6003F59F195388D20070C39A /* Main_iPhone.storyboard */,
@@ -193,6 +194,13 @@
 				B246039F07CF703D54360292 /* LICENSE */,
 			);
 			name = "Podspec Metadata";
+			sourceTree = "<group>";
+		};
+		BB43FD8D1DCA046D005AD10F /* Demo */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Demo;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

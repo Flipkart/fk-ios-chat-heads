@@ -5,6 +5,9 @@
 [![License](https://img.shields.io/cocoapods/l/FCChatHeads.svg?style=flat)](http://cocoapods.org/pods/FCChatHeads)
 [![Platform](https://img.shields.io/cocoapods/p/FCChatHeads.svg?style=flat)](http://cocoapods.org/pods/FCChatHeads)
 
+# Demo
+![chat heads demo](/Example/Demo/FCDemo.gif?raw=true)
+
 ## Usage
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
