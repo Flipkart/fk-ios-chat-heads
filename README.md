@@ -35,7 +35,7 @@ Include the following import in your file
 ### To present chat head with view
 
 ```objective-c
-[ChatHeadsController presentChatHeadWithView:<UIImage instance> chatID:<Unique identifier>];
+[ChatHeadsController presentChatHeadWithView:<UIView instance> chatID:<Unique identifier>];
 ```
 
 ### To set badge count on chat head
@@ -64,7 +64,8 @@ Return view from callback
 
 ```
 
-Refer FCChatHeadsController.h for various available options and callbacks. 
+Refer [FCChatHeadsController.h!](Pod/Classes/FCChatHeadsController.h) for more information on how to present or dismiss or hide chatheads.
+For information on callbacks refer FCChatHeadsControllerDatasource and FCChatHeadsControllerDelegate protocols in [FCChatHeadsController.h!](Pod/Classes/FCChatHeadsController.h)
 
 
 
