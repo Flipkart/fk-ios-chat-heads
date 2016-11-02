@@ -64,8 +64,8 @@ Return view from callback
 
 ```
 
-Refer [FCChatHeadsController.h!](Pod/Classes/FCChatHeadsController.h) for more information on how to present or dismiss or hide chatheads.
-For information on callbacks refer FCChatHeadsControllerDatasource and FCChatHeadsControllerDelegate protocols in [FCChatHeadsController.h!](Pod/Classes/FCChatHeadsController.h)
+Refer [FCChatHeadsController.h](Pod/Classes/FCChatHeadsController.h) for more information on how to present or dismiss or hide chatheads.
+For information on callbacks refer FCChatHeadsControllerDatasource and FCChatHeadsControllerDelegate protocols in [FCChatHeadsController.h](Pod/Classes/FCChatHeadsController.h)
 
 
 
